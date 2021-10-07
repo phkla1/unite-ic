@@ -1,29 +1,71 @@
-<!-- 
-<div class='container'>
-  <div class='content'>
-    <h1>Hello Motoko, meet Angular!</h1>
-    <h1>{{response}}</h1>
-  </div>
-</div>
--->
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Hello Motoko, meet Angular!</title>
+    <title>Unite!</title>
     <base href="/">
 </head>
-<body>
-	<div class="logo-container">
-    	<img src="../assets/logo.png" alt="DFINITY Logo" />
-    	<img src="../assets/angular.png" alt="Angular Logo" />
-	</div>
+<body class="login-page">
+	<section class="row banner">
+		<img src="../assets/unite-logo-2.svg">
+	</section>	
+
+	<section class="row internet-identity">
+		<button type="button">Login With Face, Touch, etc.</button>
+	</section>
+
+	<section class="row middle-text"> OR </section>
+
+	<section class="row traditional-login">
+		<input type="text" placeholder="Your phone number">
+		<br>
+		<input type="password" placeholder="Your 6-digit passcode">
+		<br>
+		<button type="submit">LOGIN</button>
+	</section>
+
+	<section class="row register">
+		<button class="clear-button" type="submit">New User? REGISTER!</button>
+	</section>
+
+	<!--
     <section>
-        <label for="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button id="clickMeBtn" (click)="getResponse()">Click Me!</button>
+		<div>
+        	<button type="button" style='width: 100%; height: 3em;' (click)="postmanEcho()">Test via Postman!</button>
+		</div>
+		<p>
     </section>
+
+	<section>
+		<div>
+        	<button type="button" style='width: 100%; height: 3em;'  (click)="listAllUsers()">List All Users</button>
+		</div>
+		<p>
+    </section>
+
+	<section>
+		<div>
+			<button type="button" style='width: 100%; height: 3em;' (click)="iiLogin()">II LOGIN</button>
+		</div>
+		<p>
+	</section>
+
+	<section>
+		<div>
+        	<button type="button" style='width: 100%; height: 3em;' (click)="registerThisUser()">REGISTER </button>
+		</div>
+	</section>
+
+	<section>
+		<div>
+			<button style='width: 100%; height: 3em;'  type="button" (click)="logout()">LOGOUT</button>
+		</div>
+		<p>
+	</section>
     <section id="greeting"></section>
+	<p></p>
+	-->
+
+	<section id="console"></section>
 </body>
 </html>

@@ -1,4 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+$default-button-color : #8733C1;
+$default-border-color : rgba(152, 193, 81, 0.4);
+
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body,html{
     height: 100%;
+	font-family: Lato;
 }
+
+html {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1.5rem;
+}
+
+#greeting {
+    margin: 10px auto;
+    padding: 10px 60px;
+    border: 1px solid #222;
+}
+
+#greeting:empty {
+    display: none;
+}
+
+/* default styles - mobile friendly */
+.row {
+	clear: both;	
+}
+
+.column {
+	float : left;
+}
+
+button {
+	background: $default-button-color;
+	border-radius: 8px;
+	border-width: 0;
+	width: 83.333333vw;
+	height: 7vh;
+	color: white;
+}
+
+.clear-button {
+	background: white;
+	border: 2px solid $default-button-color;
+	color: $default-button-color;
+}
+
+input {
+	width: 83.333333vw;
+	height: 7vh;
+	background: #FFFFFF;
+	border: 1px solid $default-border-color;
+	box-sizing: border-box;
+	border-radius: 8px;
+}
+
+/* styles for tablets */
+@media only screen and (min-width: 479px) {
+	button {
+		width: 41.666666666vw;
+	}
+
+	input {
+		width: 41.666666666vw;
+	}
+}
+
+/*styles for desktops */
+@media only screen and (min-width: 991px) {
+	button {
+		width: 20.83333333vw;
+	}	
+
+	input {
+		width: 20.83333333vw;
+	}
+}
+

@@ -1,28 +1,56 @@
 import { Component } from "@angular/core";
-import { IcHelloService } from "./ic-hello.service";
+import { UniteICService } from "./unite-ic.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public title = 'hello-angular-motoko';
-  public response = '';
-  constructor(private helloService: IcHelloService){
-//    this.getResponse();
-  }
-  /*
-  public async getResponse(){
-    this.response = await this.helloService.greet('Angular');
-  }
-  */
+	public title = 'unite-ic';
+	public response = '';
 
-	public async getResponse(){
-		let name = (document.getElementById('name') as HTMLInputElement)?.value;
+	constructor(private uniteConnector: UniteICService, ) {
+	}
+
+	postmanEcho() {
 		let greeting = document.getElementById('greeting');
-		this.response = await this.helloService.greet(name);
-		greeting ?  greeting.innerText = this.response : Function.prototype();
+		this.uniteConnector.httpEcho()
+		.subscribe(
+			data => {
+				greeting!.innerText = JSON.stringify(data);
+			},
+			err => {
+				greeting!.innerText = JSON.stringify(err);
+			}
+		);
+	}
 
+	async listAllUsers() {
+		let greeting = document.getElementById('greeting');
+		greeting.innerText = '......';
+		let users = this.uniteConnector.getUsers();
+		greeting? greeting.innerText += users 
+				: greeting.innerText= 'UNDEFINED GREETING:' + greeting;
+	}
+
+	async iiLogin() {
+		let greeting = document.getElementById('greeting');
+		//the connector login should return an identity
+		const id = await this.uniteConnector.login();
+		const message = "LOGIN MESSAGE IS: " + id;
+		greeting ? greeting!.innerText = message : Function.prototype();
+	}
+
+	registerThisUser() {
+		let greeting = document.getElementById('greeting');
+		let response = this.uniteConnector.register();
+		const message = "REGISTER MESSAGE IS: " + response;
+		greeting ? greeting!.innerText = message : Function.prototype();
+	}
+
+	async logout() {
+		this.uniteConnector.logout();
+		document.getElementById('greeting').innerText = '';
 	}
 }

@@ -1,0 +1,11 @@
+type UserRecord = 
+ record {
+   callerId: principal;
+   counter: nat;
+   timestamp: Time;
+ };
+type Time = int;
+service : {
+  listUsers: () -> (vec UserRecord);
+  register: () -> (bool);
+}

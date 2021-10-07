@@ -1,40 +1,13 @@
-# hello-angular-motoko
-This is an example of locally implementing the Internet Computer's motoko project along side Angular
+# unite-ic
+Thanks to @shawndotey for angular code that got this started.
+Process to run locally is to use the npm scripts (see below) or the standard dfx process:
+dfx start --clean --background
+rm -rf .dfx/local  //remove any old canisters
+dfx canister create --all
+dfx build
+dfx canister install --all //make sure you've taken note of frontend canisterId
 
-&nbsp;
-
----
-
-
-## Getting started
-
-1. [Install DFX](https://sdk.dfinity.org/docs/quickstart/local-quickstart.html). Please keep in mind the dfx cli currently only runs on Linux and Apple based PCs.
-1. [Install Angular](https://angular.io/guide/setup-local)
-1. Install npm packages from the project root: 
-
-    `npm install`
-
-&nbsp;
-
----
-### Serve Angular and the IC backend server locally with live reloading:
-    
-    npm run ng-start
-    
-- Once the job fully starts, your application will be available at `http://localhost:4200`.
-
-- If you make any changes while in development mode, the project will recompile on both the Angular and IC / Motoko side.
-    
-&nbsp;
-
----
-### Build and Serve the Angular application on the local IC server:
-
-    npm run build-dfx-www
-
-&nbsp;
-
----
+Then access the frontend canister via http://localhost:8000?canisterId=ID-OF-FRONTEND-CANISTER
 
 ### package.json Scripts
     npm run [script name]

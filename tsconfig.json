@@ -4,9 +4,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitReturns": true,
     "paths": {
       "ic-connection": [
         "dist/ic-connection/ic-connection",
@@ -20,11 +17,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2018",
     "module": "es2020",
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+	  "esnext.bigint"
     ]
   },
   "angularCompilerOptions": {

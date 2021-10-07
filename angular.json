@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hello-angular-motoko": {
+    "unite-ic": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -75,10 +75,10 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "hello-angular-motoko:build:production"
+              "browserTarget": "unite-ic:build:production"
             },
             "development": {
-              "browserTarget": "hello-angular-motoko:build:development"
+              "browserTarget": "unite-ic:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hello-angular-motoko:build"
+            "browserTarget": "unite-ic:build"
           }
         },
         "test": {
@@ -110,5 +110,5 @@
       }
     }
   },
-  "defaultProject": "hello-angular-motoko"
+  "defaultProject": "unite-ic"
 }

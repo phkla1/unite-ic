@@ -39,7 +39,7 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
-      HELLO_CANISTER_ID: canisters["hello"]
+      UNITE_CANISTER_ID: canisters["unite"]
     }),
     new webpack.ProvidePlugin({
       Buffer: [require.resolve("buffer/"), "Buffer"],

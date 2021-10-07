@@ -1,12 +1,12 @@
 {
   "canisters": {
-    "hello": {
-      "main": "src/hello/main.mo",
+    "unite": {
+      "main": "src/unite/main.mo",
       "type": "motoko"
     },
     "www": {
       "dependencies": [
-        "hello"
+        "unite"
       ],
       "frontend": {
         "entrypoint": "dist/www/index.html"
@@ -18,7 +18,7 @@
     }
   },
   
-  "dfx": "0.8.0",
+  "dfx": "0.8.1",
   "networks": {
     "local": {
       "bind": "127.0.0.1:8000",

@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/hello-angular-motoko'),
+      dir: require('path').join(__dirname, './coverage/unite-ic'),
       subdir: '.',
       reporters: [
         { type: 'html' },
