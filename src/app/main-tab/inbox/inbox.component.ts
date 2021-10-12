@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
+	chatMessages = [];
+	emptyInboxMessage = "You have no new inbox messages or broadcasts. They will appear here when sent by admins or users."
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
+
+
 
 }

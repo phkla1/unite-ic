@@ -6,31 +6,34 @@
     <base href="/">
 </head>
 <body class="login-page">
-	<mat-spinner *ngIf="showSpinner"></mat-spinner> 
+	<!-- 
+	<mat-spinner *ngIf="showSpinner; else showBody"></mat-spinner> 
+	-->
 
-	<section class="row banner">
-		<img src="../assets/unite-logo-2.svg">
-	</section>	
+		<section class="row banner">
+			<img src="../assets/unite-logo-2.svg">
+		</section>	
+	
+		<section class="row internet-identity">
+			<button type="button" (click)="iiLogin()" [disabled]="loginInProgress">Login With Face, Touch, etc.</button>
+		</section>
+	
+		<section class="row middle-text"> OR </section>
+	
+		<section class="row traditional-login">
+			<input type="text" placeholder="Your phone number">
+			<br>
+			<input type="password" placeholder="Your 6-digit passcode">
+			<br>
+			<button type="submit">LOGIN</button>
+		</section>
+	
+		<section class="row register" id="console">
+			<!--
+			<button class="clear-button" type="submit" (click)="iiLogin()">New User? REGISTER!</button>
+			-->
+		</section>
 
-	<section class="row internet-identity">
-		<button type="button" (click)="iiLogin()" [disabled]="loginInProgress">Login With Face, Touch, etc.</button>
-	</section>
-
-	<section class="row middle-text"> OR </section>
-
-	<section class="row traditional-login">
-		<input type="text" placeholder="Your phone number">
-		<br>
-		<input type="password" placeholder="Your 6-digit passcode">
-		<br>
-		<button type="submit">LOGIN</button>
-	</section>
-
-	<section class="row register" id="console">
-		<!--
-		<button class="clear-button" type="submit" (click)="iiLogin()">New User? REGISTER!</button>
-		-->
-	</section>
 
 <!-- 
     <section>

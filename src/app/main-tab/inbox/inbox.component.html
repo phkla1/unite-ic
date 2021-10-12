@@ -1,1 +1,17 @@
-<p>inbox works!</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Inbox</title>
+		<base href="/">
+	</head>
+	<body>
+		<section *ngIf="chatMessages.length > 1; else showEmpty">
+		</section>
+		<ng-template #showEmpty>
+			<section class="empty-inbox">
+				{{emptyInboxMessage}}
+			</section>
+		</ng-template>
+	</body>
+</html>

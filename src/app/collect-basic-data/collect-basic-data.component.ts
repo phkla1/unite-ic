@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute , Router} from '@angular/router';
 import { from } from 'rxjs';
 import {UserRecord} from '../services/interfaces'; 
+import { UniteHttpService } from '../services/unite-http.service';
 import { UniteICService } from '../services/unite-ic.service';
+declare var require : any;
 
 @Component({
   selector: 'app-collect-basic-data',
@@ -16,7 +18,7 @@ export class CollectBasicDataComponent implements OnInit {
 	showPhone = 'visible';
 	record : UserRecord;
 
-	constructor(private activatedRoute : ActivatedRoute, private router : Router, private uniteConnector: UniteICService) { }
+	constructor(private activatedRoute : ActivatedRoute, private router : Router, private icConnector: UniteICService, private uniteConnector: UniteHttpService ) { }
 
 	ngOnInit(): void {
 		this.activatedRoute.paramMap.subscribe(
@@ -36,20 +38,29 @@ export class CollectBasicDataComponent implements OnInit {
 	}
 
 	completeRegistration(firstname, surname, phone) {
+		console.log("CONMPLETING REGISTRATION", firstname, surname, phone);
+		if(firstname && surname && phone) {
+			from(this.icConnector.updateRecord(firstname, surname, phone))
+			.subscribe(
+				data => {
+					console.log("DATA FROM IC:", data);
+					if(data) {
+						//inform Unite server about new registration, then goto inbox
+						this.uniteConnector.icRegister(this.record.callerId)
+						.subscribe();
+						this.router.navigateByUrl('/inbox');
+					}
+					else {
+						this.router.navigateByUrl('/login');
+					}
+				},
+				err => {
+					this.showConsole("ERROR:" + err);
+				}
+			);
+		}
 		//send the relevant fields to the backend, and then navigate to inbox 
-		firstname ? this.showConsole(firstname) : Function.prototype();
-		surname ? this.showConsole(surname) : Function.prototype();
-		phone ? this.showConsole(phone) : Function.prototype(); 
 
-		from(this.uniteConnector.updateRecord(firstname, surname, phone)).subscribe(
-			data => {
-				let msg = 'response from updateRecord is:' + data;
-				this.showConsole(msg);	
-			},
-			err => {
-				this.showConsole(err);
-			}
-		)
 	}
 
 }

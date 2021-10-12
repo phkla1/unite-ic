@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http'; 
 import { AuthClient } from "@dfinity/auth-client";
 import { Identity } from '@dfinity/agent';
 import {DOCUMENT} from '@angular/common'; 
@@ -12,7 +11,6 @@ const createActor = require('src/declarations/unite').createActor;
 	providedIn: 'root'
 })
 export class UniteICService {
-	http : HttpClient;
 	authClient : AuthClient;
 	currentIdentity : Identity;
 	DFX_NETWORK = null;
@@ -21,8 +19,7 @@ export class UniteICService {
 	loggedIn	= false;
 	public loginSubject : Subject<boolean>;
 
-	constructor(http : HttpClient, @Inject(DOCUMENT) private document: Document) { 
-		this.http = http;
+	constructor(@Inject(DOCUMENT) private document: Document) { 
 		this.init();
 		this.loginSubject = new Subject<boolean>();
 	}
@@ -134,9 +131,4 @@ export class UniteICService {
 		this.renderConsole(null);
 	}
 
-	public httpEcho() {
-		let params = new HttpParams();
-		params.set('foo', 'bar');
-		return this.http.get('https://ictest.free.beeceptor.com', {params});
-	}
 }
