@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import { AuthClient } from "@dfinity/auth-client";
 import { Identity } from '@dfinity/agent';
 import {DOCUMENT} from '@angular/common'; 
+import { Subject } from 'rxjs';
 const unite_default_actor = require('src/declarations/unite').unite;
 const canisterId = require('src/declarations/unite').canisterId; 
 const createActor = require('src/declarations/unite').createActor; 
@@ -16,12 +17,14 @@ export class UniteICService {
 	currentIdentity : Identity;
 	DFX_NETWORK = null;
 	LOCAL_II_CANISTER = 'r7inp-6aaaa-aaaaa-aaabq-cai';
-	LOCAL_II_URL = "https://13b4-45-91-22-250.ngrok.io" + "?canisterId=" + this.LOCAL_II_CANISTER;
+	LOCAL_II_URL = "https://e075-197-211-58-61.ngrok.io" + "?canisterId=" + this.LOCAL_II_CANISTER;
 	loggedIn	= false;
+	public loginSubject : Subject<boolean>;
 
 	constructor(http : HttpClient, @Inject(DOCUMENT) private document: Document) { 
 		this.http = http;
 		this.init();
+		this.loginSubject = new Subject<boolean>();
 	}
 
 	//console logs can be difficult to see when using mobile phones with small screens, so this function logs to the UI
@@ -42,25 +45,36 @@ export class UniteICService {
 		this.authClient = await AuthClient.create();
 	}
 
-	public login() {
+	public iilogin() {
 		return this.authClient.login({
-			identityProvider : this.DFX_NETWORK === "ic" ? "https://identity.ic0.app/#authorize" : this.LOCAL_II_URL,
+			identityProvider : this.DFX_NETWORK === "ic" 
+								? "https://identity.ic0.app/#authorize" 
+								: this.LOCAL_II_URL,
 			onSuccess : async () => {
 				this.currentIdentity = await this.authClient.getIdentity(); 
-//				let id = await this.authClient.getIdentity(); 
 				this.loggedIn = true;
-				this.renderConsole(JSON.stringify(this.currentIdentity));
-				return this.currentIdentity;
-//				return id;
+//				this.renderConsole(JSON.stringify(this.currentIdentity));
+				this.loginSubject.next(true);
+				return true;
 			},
 			onError : async () => {
-				return 'login failed!';
+				this.loginSubject.next(false);
+				return false;
 			}
 		});
 	}
 
-	async connectToIc(fn : string) {
-//		let identity = await this.authClient.getIdentity();
+	//register if not registered, and send a response indicating if there are any missing fields that the user needs to supply
+	public async checkRegistration() {
+		if(this.loggedIn) {
+			return await this.connectToIc('register');
+		}
+		else {
+			return false;
+		}
+	}
+
+	async connectToIc(fn : string, args?) {
 		let result;
 		let identity = this.currentIdentity;
 		let unite_actor = createActor(
@@ -70,28 +84,25 @@ export class UniteICService {
 				} 
 			}
 		);
-		this.renderConsole("CALLING " + fn + " WITH IDENTITY " + identity.getPrincipal());
+
 		switch (fn) {
 			case 'listUsers':
 				result = await unite_actor.listUsers();
 				break;
 			case 'register':
-				result = await unite_actor.register();
+				result = await unite_actor.registerLogin();
+				break;
+			case 'updateUserRecord':
+				result = await unite_actor.updateUserRecord(args);
 				break;
 			default:
 				break;
 		}
 		try {
-			if(fn == 'register') {
-				this.renderConsole('RESULT FROM ' + fn + ' ' + JSON.stringify(result));
-			}
-			else {
-				let res = JSON.stringify(result, (key, value) =>
-					typeof value === "bigint" 	? value.toString() + "n" 
-												: value
-				);
-				this.renderConsole('RESULT FROM ' + fn + ' ' + res);
-			}
+			let res = JSON.stringify(result, (key, value) =>
+				typeof value === "bigint" ? value.toString()  : value
+			);
+			this.renderConsole('RESULT FROM ' + fn + ' ' + res);
 		} catch (error) {
 			this.renderConsole(error);	
 		}
@@ -99,14 +110,6 @@ export class UniteICService {
 		return result;
 	}
 
-	public async register() {
-		if(this.loggedIn) {
-			return await this.connectToIc('register');
-		}
-		else {
-			return false;
-		}
-	}
 
 	public async getUsers() {
 		if(!this.loggedIn) {
@@ -121,6 +124,10 @@ export class UniteICService {
 		}
 	}
 
+	public async updateRecord(firstname, surname, phone) {
+		let recordToAdd = { firstname, surname, phone };
+		return await this.connectToIc('updateUserRecord', recordToAdd);
+	}
 
 	public logout() { 
 		this.loggedIn = false;

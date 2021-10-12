@@ -4,8 +4,9 @@ import Int "mo:base/Int";
 import Principal "mo:base/Principal";
 import Text "mo:base/Text";
 import Time "mo:base/Time";
-//import Types "./types";
+import Types "./types";
 import UserDatabase "mo:base/Array";
+import Option "mo:base/Option";
 
 /* 
 register users with valid II authentication. 
@@ -13,44 +14,12 @@ All endpoints require registration except the registration endpoint
 */
 
 actor {
-	type UserRecord = {
-		callerId : Principal;
-		timestamp : Time.Time;
-		counter : Nat;
-	};
-
-	type RegistrationResponse = {
-		principal : Text;
-		timestamp : Time.Time;
-		message : Int;
-		deleteThis : Nat;
-	};
-
-    type HeaderField = (Text, Text);
-
-    type HttpRequest = {
-        method: Text;
-        url: Text;
-        headers: [HeaderField];
-        body: Blob;
-    };
-
-    type HttpResponse = {
-        status_code: Nat16;
-        headers: [HeaderField];
-        body: Blob;
-    };
-	/*
   	type UserRecord = Types.UserRecord;
-
 	type RegistrationResponse = Types.RegistrationResponse; 
-
-    type HeaderField = Types.HeaderField;
-
-    type HttpRequest = Types.HttpRequest;
-
-    type HttpResponse = Types.HttpResponse; 
-	*/
+	type UserId = Types.UserId;
+	type Timestamp = Types.Timestamp;
+	type Count = Types.Count;
+	type UserRecordAddendum = Types.UserRecordAddendum;
 
 	var userDatabase : [UserRecord] = []; 
 
@@ -64,7 +33,7 @@ actor {
 		}
 	};
 
-	func isRegistered(userId : Principal) : Bool {
+	func isRegistered(userId : UserId) : Bool {
 		func userExists(user: UserRecord): Bool { user.callerId == userId };
     
     	switch (Array.find<UserRecord>(userDatabase, userExists)) {
@@ -73,23 +42,95 @@ actor {
     	};
 	};
 
-	public shared(msg) func register() : async Bool {
-		var caller : Principal = msg.caller;
-		var timenow : Time.Time = Time.now();
-		var count : Nat = userDatabase.size();
-		var newUser : UserRecord = {
-				callerId = caller;
-				timestamp = timenow;
-				counter = count;
+	func getUserRecord(userId: UserId) : ?UserRecord {
+		func userExists(user: UserRecord): Bool { user.callerId == userId };
+		var user : ?UserRecord = Array.find<UserRecord>(userDatabase, userExists);
+		return user;
+	};
+
+	public shared(msg) func registerLogin() : async UserRecord {
+		/*
+		Is the user registered? If not register. Then return current user record.
+		*/
+		var caller : UserId = msg.caller;
+		var record : UserRecord = {
+			callerId = caller;
+			timestamp = Time.now();
+			counter = userDatabase.size();
+			firstname = "";
+			surname = "";
+			phone = "";	
 		};
-		Console.print(debug_show("NEW USER:", newUser));
+
 		if(isRegistered(caller)) {
-			false
+			record := Option.get<UserRecord>(getUserRecord(caller), record);
 		}
 		else {
-			userDatabase := Array.append(userDatabase, [newUser]);
-			true
+			userDatabase := Array.append(userDatabase, [record]);
+		};
+
+		Console.print(debug_show("NEW USER:", record));
+		return record;
+	};
+
+	public shared(msg) func updateUserRecord(recordAddition : UserRecordAddendum) : async Bool {
+		//add the supplied fields to the user's record
+		if(hasAccess(msg.caller)) {
+			/*
+			func updateRecord(record : UserRecord) : UserRecord {
+				var newRecord : UserRecord = {
+					callerId = record.callerId;
+					timestamp = record.timestamp;
+					counter = record.counter;
+					firstname = "";
+					surname = "";
+					phone = "";
+				};
+
+				if(record.callerId != msg.caller) {
+					return record;
+				}
+				else {
+					if(recordAddition.firstname) {
+						newRecord.firstname := recordAddition.firstname;
+					};
+					if(recordAddition.surname) {
+						newRecord.surname := recordAddition.surname;
+					};
+					if(recordAddition.phone) {
+						newRecord.phone := recordAddition.phone;
+					};
+					newRecord
+				};
+			};
+
+			var newDb = Array.map(userDatabase, updateRecord);
+			*/
+
+			func updateRecord(i : Nat) : UserRecord {
+				if(userDatabase[i].callerId == msg.caller) {
+					{
+						callerId = msg.caller;
+						timestamp = Time.now();
+						counter = i;
+						firstname = recordAddition.firstname;
+						surname = recordAddition.surname;
+						phone = recordAddition.phone;		
+					}
+				}
+				else {
+					userDatabase[i];
+				}
+			};
+			var newDb : [UserRecord] = Array.tabulate<UserRecord>(userDatabase.size(), updateRecord);
+			userDatabase := newDb;
+			Console.print(debug_show("DB:", userDatabase));
+			return true;
 		}
+		else {
+			Console.print(debug_show("NO PERMISSIONS"));
+			return false;
+		}	
 	};
 
 	public shared(msg) func listUsers() : async [UserRecord] {

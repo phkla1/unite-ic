@@ -1,0 +1,45 @@
+/*
+* {
+	margin: 0;
+	padding: 0;
+}
+*/
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: center
+}
+
+.login-page {
+	display: grid;
+	grid-template-rows: repeat(8, 12.5vh);
+	grid-template-columns: repeat(12, 1fr);
+}
+
+.banner {
+	grid-row: 1;
+	grid-column: 1 / 13;
+}
+
+.internet-identity {
+	grid-row: 2;
+	grid-column: 1 / 13;
+}
+
+.middle-text {
+	grid-row: 3;
+	grid-column: 1 / 13;
+}
+
+.traditional-login{
+	grid-row: 4 / 6;
+	grid-column: 1 / 13;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.register {
+	grid-row: 7;
+	grid-column: 1 / 13;
+}

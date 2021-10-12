@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unite!</title>
+    <base href="/">
+</head>
+<body class="login-page">
+	<section class="row banner">
+		<img src="../assets/unite-logo-2.svg">
+	</section>	
+
+	<section class="row page-message">
+		You're almost done. Please provide {{missingFields}} below:
+	</section>
+
+	<form (submit)="completeRegistration(firstname.value, surname.value, phone.value)" ngNativeValidate class="simple-form">
+		<input #firstname type="text" [style.visibility]="showFirstname" [required]="true" placeholder="Your first name">
+		<br>
+		<input #surname type="text" [style.visibility]="showSurname" [required]="true" placeholder="Your surname">
+		<br>
+		<input #phone type="tel" pattern="^([0-9]{11,})" [style.visibility]="showPhone" [required]="true" placeholder="Phone number">
+		<br>
+		<button type="submit">Complete Registration</button>
+	</form>
+
+	<section class="row submit-button" id="console">
+		<!--
+		<button class="clear-button" type="submit" (click)="iiLogin()">New User? REGISTER!</button>
+		-->
+	</section>
+
+</body>
+</html>

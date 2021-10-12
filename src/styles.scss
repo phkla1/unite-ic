@@ -5,6 +5,8 @@ $default-border-color : rgba(152, 193, 81, 0.4);
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body,html{
@@ -22,14 +24,8 @@ body {
     font-size: 1.5rem;
 }
 
-#greeting {
-    margin: 10px auto;
-    padding: 10px 60px;
-    border: 1px solid #222;
-}
-
-#greeting:empty {
-    display: none;
+mat-spinner {
+    margin: 0 auto;
 }
 
 /* default styles - mobile friendly */

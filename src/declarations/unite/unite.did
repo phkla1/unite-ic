@@ -1,11 +1,24 @@
+type UserRecordAddendum = 
+ record {
+   firstname: ContactField;
+   phone: ContactField;
+   surname: ContactField;
+ };
 type UserRecord = 
  record {
-   callerId: principal;
-   counter: nat;
-   timestamp: Time;
+   callerId: UserId;
+   counter: Count;
+   firstname: ContactField;
+   phone: ContactField;
+   surname: ContactField;
+   timestamp: Timestamp;
  };
-type Time = int;
+type UserId = principal;
+type Timestamp = int;
+type Count = nat;
+type ContactField = text;
 service : {
   listUsers: () -> (vec UserRecord);
-  register: () -> (bool);
+  registerLogin: () -> (UserRecord);
+  updateUserRecord: (UserRecordAddendum) -> (bool);
 }
