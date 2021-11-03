@@ -1,17 +1,50 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Inbox</title>
-		<base href="/">
-	</head>
-	<body>
-		<section *ngIf="chatMessages.length > 1; else showEmpty">
-		</section>
-		<ng-template #showEmpty>
-			<section class="empty-inbox">
-				{{emptyInboxMessage}}
+
+<head>
+	<meta charset="UTF-8">
+	<title>Inbox</title>
+	<base href="/">
+</head>
+
+<body>
+	<header>
+		<section class="column">
+			<button id="hamburger" (click)="toggleSidenav()">&#9776;</button>
+		</section>	
+	</header>
+	<nav class="dropdown row" id="sidenav" *ngIf="sidenavOpen">
+		<ul>
+			<li><span (click)="openModal('connections-modal')">Add New Connection</span></li>
+			<li><a href="#">Second item</a></li>
+			<li><a href="#">Third item</a></li>
+		</ul>
+	</nav>
+
+	<app-modalbasic id='connections-modal'>
+		Connect to other users to send messages...
+		<ul>
+			<li *ngFor="let user of otherUsers">
+				<p><span (click)="addConnection(user.callerId)">{{user.firstname}} {{user.surname}}</span></p>
+			</li>
+			
+		</ul>
+		<button (click)="closeModal('connections-modal')">Close</button>
+	</app-modalbasic>
+
+	<main class="main-body" *ngIf="connections.length > 0; else showEmpty">
+		<section (click)="openConversation(connection.callerId)" class="contact-card" *ngFor="let connection of connections">
+			<section class="contact-icon"><img src="../../../assets/unite-logo-2.svg"></section>
+			<section class="contact-details">
+				<strong>{{connection.firstname}} {{connection.surname}}</strong>
 			</section>
-		</ng-template>
-	</body>
+		</section>
+	</main>
+	<ng-template #showEmpty>
+		<section class="empty-inbox main-body">
+			{{emptyInboxMessage}}
+		</section>
+	</ng-template>
+</body>
+
 </html>

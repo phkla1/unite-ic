@@ -1,7 +1,75 @@
+$default-button-color : #8733C1;
+$default-border-color : rgba(152, 193, 81, 0.4);
+
+.dropdown {
+	background-color: rgba(234, 221, 246, 1);
+}
+
+.dropdown li {
+	list-style-type: none;
+}
+
+.dropdown span {
+	margin : 2rem;
+	padding: 2rem;
+}
+
+
+.dropdown a {
+	display: block;
+	padding: 0.5rem 0 0.5rem 2rem;
+	text-align: left;
+	text-decoration: none;
+}
+
+.dropdown ul.open {
+	display : block;
+}
+
+.dropdown li:hover {
+	background-color: rgba(0,0,0,0.2);
+}
+
+.dropdown li.active {
+	background-color: rgba(0,0,0,0.5);
+}
+
+#hamburger {
+	background: none;
+	border: none;
+	color : $default-button-color;
+	font-size : 3rem;
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+}
+
 .empty-inbox {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	padding: 15%;
+}
+
+.contact-card {
+	width: 100%;
+	height: 4rem;
+	border-top: 2px $default-border-color;
+	border-bottom : 2px $default-border-color; 
+	display: grid;
+	text-align: center;
+	background-color:rgba(234, 221, 246, 1);
+	grid-template-columns: 25% 75%;
+}
+
+.contact-icon {
+	grid-column: 1;
+	padding : 5%;
+}
+
+.contact-details {
+	grid-column: 2;
+	padding : 5%;
+	cursor: pointer;
 }

@@ -13,12 +13,28 @@ type UserRecord =
    surname: ContactField;
    timestamp: Timestamp;
  };
+type UserId__1 = principal;
 type UserId = principal;
+type Timestamp__1 = int;
 type Timestamp = int;
 type Count = nat;
+type ContactField__1 = text;
 type ContactField = text;
+type ChatMessage = 
+ record {
+   body: text;
+   from: principal;
+   timestamp: Timestamp;
+   to: Count;
+ };
 service : {
-  listUsers: () -> (vec UserRecord);
+  connect: (UserId__1) -> ();
+  getConnections: (text) -> (vec UserRecord);
+  getLatestChats: (Timestamp__1) -> (vec ChatMessage);
+  getMyRecord: (text) -> (UserRecord);
+  listUsers: (text) -> (vec UserRecord);
+  nameLogin: (ContactField__1) -> (UserRecord);
+  putChat: (ChatMessage) -> (nat);
   registerLogin: () -> (UserRecord);
   updateUserRecord: (UserRecordAddendum) -> (bool);
 }

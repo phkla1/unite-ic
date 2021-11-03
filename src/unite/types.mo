@@ -5,10 +5,11 @@ import Nat "mo:base/Nat";
 
 module {
 
-	type ContactField = Text;
+	public type ContactField = Text;
 	public type Count = Nat;
 	public type Timestamp = Time.Time;
 	public type UserId = Principal;
+	public type Vertex = Principal;
 
   	public type UserRecord = {
 		callerId : UserId;
@@ -29,7 +30,14 @@ module {
 		firstname : ContactField;
 		surname : ContactField;
 		phone : ContactField;	
-	}
+	};
+
+	public type ChatMessage = {
+		from : Principal;
+		to	: Count;
+		body : Text;
+		timestamp : Timestamp;
+	};
 
 /*
     public type HeaderField = (Text, Text);

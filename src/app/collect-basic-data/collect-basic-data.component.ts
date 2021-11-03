@@ -55,7 +55,7 @@ export class CollectBasicDataComponent implements OnInit {
 					}
 				},
 				err => {
-					this.showConsole("ERROR:" + err);
+					console.log("registration ERROR:" + err);
 				}
 			);
 		}

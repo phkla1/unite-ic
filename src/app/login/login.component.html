@@ -6,74 +6,24 @@
     <base href="/">
 </head>
 <body class="login-page">
-	<!-- 
-	<mat-spinner *ngIf="showSpinner; else showBody"></mat-spinner> 
-	-->
-
 		<section class="row banner">
 			<img src="../assets/unite-logo-2.svg">
 		</section>	
 	
 		<section class="row internet-identity">
-			<button type="button" (click)="iiLogin()" [disabled]="loginInProgress">Login With Face, Touch, etc.</button>
+			<button class="login-button" type="button" (click)="iiLogin()" [disabled]="loginInProgress">Login With Face, Touch, etc.</button>
 		</section>
 	
 		<section class="row middle-text"> OR </section>
 	
 		<section class="row traditional-login">
-			<input type="text" placeholder="Your phone number">
+			<input type="text" placeholder="Your phone number" [(ngModel)]="phone">
 			<br>
-			<input type="password" placeholder="Your 6-digit passcode">
+			<input type="password" placeholder="Your 6-digit passcode" [(ngModel)]="password">
 			<br>
-			<button type="submit">LOGIN</button>
+			<button (click)="loginByName()" class="login-button" type="submit">LOGIN</button>
 		</section>
 	
-		<section class="row register" id="console">
-			<!--
-			<button class="clear-button" type="submit" (click)="iiLogin()">New User? REGISTER!</button>
-			-->
-		</section>
-
-
-<!-- 
-    <section>
-		<div>
-        	<button type="button" style='width: 100%; height: 3em; margin: 2em;' (click)="postmanEcho()">Test via Postman!</button>
-		</div>
-		<p>
-    </section>
-
-	<section>
-		<div>
-        	<button type="button" style='width: 100%; height: 3em;margin: 2em;'  (click)="listAllUsers()">List All Users</button>
-		</div>
-		<p>
-    </section>
-
-	<section>
-		<div>
-			<button type="button" style='width: 100%; height: 3em; margin: 2em;' (click)="iiLogin2()">II LOGIN</button>
-		</div>
-		<p>
-	</section>
-
-	<section>
-		<div>
-        	<button type="button" style='width: 100%; height: 3em;margin: 2em;' (click)="registerThisUser()">REGISTER </button>
-		</div>
-	</section>
-
-	<section>
-		<div>
-			<button style='width: 100%; height: 3em;'  type="button" (click)="logout()">LOGOUT</button>
-		</div>
-		<p>
-	</section>
-    <section id="greeting"></section>
-	<p></p>
-
-	<section id="console"></section>
--->
-
+		<section class="row register" id="console"></section>
 </body>
 </html>

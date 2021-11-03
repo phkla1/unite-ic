@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
 	loginSub : Subscription;
 	loginInProgress = false;
 	profile : UserRecord;
-	showSpinner : boolean = false;
+	phone : string;
+	password : string;
 
 	constructor(private uniteConnector: UniteICService, private router:Router) {
 		this.profile = new Object as UserRecord;
@@ -43,11 +44,9 @@ export class LoginComponent implements OnInit {
 		.subscribe(
 			(data:UserRecord) => {
 				if(!data.firstname || !data.surname || !data.phone) {
-//					this.showSpinner = false;
 					this.router.navigateByUrl('/collectData', {state : data});
 				}
 				else {
-//					this.showSpinner = false;
 					this.router.navigateByUrl('/inbox');
 				}
 				/*
@@ -57,23 +56,36 @@ export class LoginComponent implements OnInit {
 			},
 			err => {
 				this.loginInProgress = false;
-//				this.showSpinner = false;
-				//Add Toast message about login error...
 			},
 			() => {
 				//we don't expect this to happen
 				this.loginInProgress = false;	
-				this.showSpinner = false;
 			}
 		)
 	}
 
+	loginByName() {
+		if(this.phone && this.password) {
+			this.uniteConnector.phoneLogin(this.phone).then(
+				value => {
+					if(value.firstname) {
+						this.uniteConnector.name = value.firstname;
+						this.router.navigateByUrl('/inbox');
+					}
+					else {
+						console.log("EMPTY RECORD")
+					}
+				},
+				fail => {
+					console.log("FAILED TO LOGIN:", fail)
+				}
+			);
+		}
+	}
 
 	async logout() {
 		this.uniteConnector.logout();
 		document.getElementById('greeting').innerText = '';
 		this.loginSub.unsubscribe();
 	}
-
 }
-
