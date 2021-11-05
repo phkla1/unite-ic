@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ModalService } from 'src/app/modalbasic/modal.service';
@@ -27,7 +28,7 @@ export class InboxComponent implements OnInit {
 	connections : UserRecord[] = [];
 	thisUser : UserRecord;
 
-	constructor(private modalService : ModalService, private uniteConnector: UniteICService) { 
+	constructor(private modalService : ModalService, private uniteConnector: UniteICService, private router : Router) { 
 		this.thisUser = new Object as UserRecord;
 	}
 
@@ -93,7 +94,10 @@ export class InboxComponent implements OnInit {
 		);
 	}
 
+	/*
 	openConversation(userId) {
 		console.log("OPENING CHAT BOX")
+		this.router.navigate(['conversation'], {state : {userId : userId} });
 	}
+	*/
 }

@@ -1,0 +1,47 @@
+.messages-container {
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 10vh 80vh 10vh;
+}
+
+header {
+	grid-row: 1;
+	background-color:rgba(234, 221, 246, 1);
+}
+
+.messages {
+	grid-row: 2;
+	background-color: darkgray;
+	padding: 2%;
+	display: flex;
+	flex-direction: column;
+}
+
+.chat-box {
+	min-height: 3rem;
+	width: 60%;
+}
+
+.our-chat {
+	align-self: flex-start;
+	border-radius: 10% 10% 10% 0%;
+}
+
+.their-chat {
+	align-self: flex-end;
+	border-radius: 10% 10% 0% 10%;
+}
+
+footer {
+	grid-row: 3;
+	background-color:rgba(234, 221, 246, 1);
+	padding: 10%;
+	display: grid;
+	grid-template-columns: 80% 20%;
+}
+
+.send-message {
+	background-color: white;
+	border-radius: 25%;
+	border: 2px solid plum;
+}

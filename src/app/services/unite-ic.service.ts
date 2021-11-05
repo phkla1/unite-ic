@@ -30,7 +30,6 @@ export class UniteICService {
 		this.authClient = await AuthClient.create();
 	}
 
-
 	public iilogin() {
 		return this.authClient.login({
 		identityProvider : this.DFX_NETWORK === "ic" 
@@ -126,6 +125,15 @@ export class UniteICService {
 		else {
 			return await unite_default_actor.getConnections(this.name);
 		}
+	}
+
+	public async sendMessage(message) {
+		if(this.iiLoggedIn) {
+			return await this.unite_actor.putChat('', message);
+		}
+		else {
+			return await unite_default_actor.getConnections(this.name, message);
+		}	
 	}
 
 	public logout() { 

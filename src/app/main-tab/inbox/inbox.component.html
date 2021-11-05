@@ -33,10 +33,14 @@
 	</app-modalbasic>
 
 	<main class="main-body" *ngIf="connections.length > 0; else showEmpty">
-		<section (click)="openConversation(connection.callerId)" class="contact-card" *ngFor="let connection of connections">
-			<section class="contact-icon"><img src="../../../assets/unite-logo-2.svg"></section>
-			<section class="contact-details">
-				<strong>{{connection.firstname}} {{connection.surname}}</strong>
+		<section *ngFor="let connection of connections">
+			<section class="contact-card">
+				<section class="contact-icon"><img src="../../../assets/unite-logo-2.svg"></section>
+				<section class="contact-details">
+					<a [routerLink]="['/conversation', connection.firstname]">
+						<strong>{{connection.firstname}} {{connection.surname}}</strong>
+					</a>
+				</section>
 			</section>
 		</section>
 	</main>

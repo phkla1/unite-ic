@@ -7,8 +7,9 @@ module {
 
 	public type ContactField = Text;
 	public type Count = Nat;
+	public type GroupId = Nat;
 	public type Timestamp = Time.Time;
-	public type UserId = Principal;
+	public type UserId = ?Principal ;
 	public type Vertex = Principal;
 
   	public type UserRecord = {
@@ -34,11 +35,21 @@ module {
 
 	public type ChatMessage = {
 		from : Principal;
-		to	: Count;
+		toGroup	: Count;
 		body : Text;
 		timestamp : Timestamp;
 	};
 
+	public type UserGroup = {
+		creator : UserId;
+		groupId : GroupId;
+		name : Text;
+	};
+
+	public type UserGroupEntry = {
+		groupId : GroupId;
+		userId : UserId;
+	};
 /*
     public type HeaderField = (Text, Text);
 
