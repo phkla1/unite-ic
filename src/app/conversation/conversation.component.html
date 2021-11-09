@@ -1,16 +1,28 @@
-<main class="messages-container">
-	<header>
-		here is the header
-	</header>
-	<section class="messages">
-		<div class="our-chat-box">
-			hello from me
-		</div>
-		<div class="their-chat-box">
-			hello from them
-		</div>
+<main class="main-body">
+	<section class="messages-container">
+		<header>
+			<section class="header-logo">
+				<img class="small-image" src="../../../assets/ios-contact.svg">
+			</section>
+			<section class="header-text">
+				Chat with {{userId}}
+			</section>
+		</header>
+		<section class="messages">
+			<!-- <div class="chat-box our-chat">
+				hello from me
+			</div>
+			<div class="chat-box their-chat">
+				hello from them
+			</div> -->
+		</section>
+		<footer>
+			<textarea id="sendMessage" class="footer-send-message" placeholder="type your message here" rows="1" maxlength="60" (keyup)="adjustHeight()"></textarea>
+			<div class="footer-send-button">
+				<span class="m_scroll_arrows ikan"></span>
+				<span class="m_scroll_arrows meji"></span>
+				<span class="m_scroll_arrows meta"></span>	
+			</div>
+		</footer>
 	</section>
-	<footer>
-		<input class="send-message" type="text" placeholder="type your message here">
-	</footer>
 </main>

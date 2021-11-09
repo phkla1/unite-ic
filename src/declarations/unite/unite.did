@@ -13,10 +13,11 @@ type UserRecord =
    surname: ContactField;
    timestamp: Timestamp;
  };
-type UserId__1 = principal;
-type UserId = principal;
+type UserId__1 = opt principal;
+type UserId = opt principal;
 type Timestamp__1 = int;
 type Timestamp = int;
+type GroupId = nat;
 type Count = nat;
 type ContactField__1 = text;
 type ContactField = text;
@@ -25,13 +26,16 @@ type ChatMessage =
    body: text;
    from: principal;
    timestamp: Timestamp;
-   to: Count;
+   toGroup: Count;
  };
 service : {
   connect: (UserId__1) -> ();
+  createGroup: (text) -> (nat);
   getConnections: (text) -> (vec UserRecord);
-  getLatestChats: (Timestamp__1) -> (vec ChatMessage);
+  getLatestDirectChats: (Timestamp__1) -> (vec ChatMessage);
+  getLatestGroupChats: (Timestamp__1) -> (vec ChatMessage);
   getMyRecord: (text) -> (UserRecord);
+  joinGroup: (GroupId) -> (bool);
   listUsers: (text) -> (vec UserRecord);
   nameLogin: (ContactField__1) -> (UserRecord);
   putChat: (ChatMessage) -> (nat);

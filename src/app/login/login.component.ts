@@ -28,6 +28,11 @@ export class LoginComponent implements OnInit {
 	//authclient login gives a success message once the II login page opens, so we need loginSub to tell us when the login is actually successful
 	async iiLogin() {
 		this.loginInProgress = true;
+        let button = document.getElementById('iiLogin') as HTMLButtonElement;
+        button.innerHTML = `&#x263A`;
+        button.classList.add('spin-button');
+		button.disabled = true;
+
 		let response = await this.uniteConnector.iilogin();
 		this.loginSub = this.uniteConnector.loginSubject
 		.pipe(

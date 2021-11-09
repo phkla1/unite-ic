@@ -7,11 +7,15 @@
 </head>
 <body class="login-page">
 		<section class="row banner">
-			<img src="../assets/unite-logo-2.svg">
+			<img src="../assets/unite-logo-2.svg"> 
+			<!-- developing on localhost: for whatever reason unless we load images on this login/landing page they will not show up on any other page...so we need to "preload" here-->
+			<div style="display: none;">
+				<img src="../assets/ios-contact.svg"> 	
+			</div>
 		</section>	
 	
 		<section class="row internet-identity">
-			<button class="login-button" type="button" (click)="iiLogin()" [disabled]="loginInProgress">Login With Face, Touch, etc.</button>
+			<button id="iiLogin" class="login-button" type="button" (click)="iiLogin()" [disabled]="loginInProgress">Login With Face, Touch, etc.</button>
 		</section>
 	
 		<section class="row middle-text"> OR </section>

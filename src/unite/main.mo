@@ -370,7 +370,7 @@ actor {
 			Console.print(debug_show("CONNECTION LIST IS EMPTY:"));
 			return [];
 		};
-	}
+	};
 
 /*
     public shared query(msg) func http_request(request : HttpRequest) : async HttpResponse {

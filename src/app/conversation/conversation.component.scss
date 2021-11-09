@@ -1,47 +1,158 @@
-.messages-container {
+.main-body {
 	height: 100vh;
+	padding: 10%;
+	background-color: gainsboro;
+}
+
+.messages-container {
 	display: grid;
-	grid-template-rows: 10vh 80vh 10vh;
+	grid-template-rows: auto 80% auto;
 }
 
 header {
 	grid-row: 1;
 	background-color:rgba(234, 221, 246, 1);
+	display: grid;
+	grid-template-columns: 20% 80%;
+	padding: 0.5rem;
 }
+
+.header-logo {
+	grid-column: 1;
+}
+.header-text {
+	grid-column: 2;
+	display: flex;
+	align-items: center;
+}
+
 
 .messages {
 	grid-row: 2;
-	background-color: darkgray;
+	background-color: lightgrey;
 	padding: 2%;
 	display: flex;
 	flex-direction: column;
 }
 
-.chat-box {
-	min-height: 3rem;
-	width: 60%;
-}
-
-.our-chat {
-	align-self: flex-start;
-	border-radius: 10% 10% 10% 0%;
-}
-
-.their-chat {
-	align-self: flex-end;
-	border-radius: 10% 10% 0% 10%;
-}
-
 footer {
 	grid-row: 3;
 	background-color:rgba(234, 221, 246, 1);
-	padding: 10%;
+	padding: 5%;
 	display: grid;
 	grid-template-columns: 80% 20%;
 }
 
-.send-message {
-	background-color: white;
-	border-radius: 25%;
-	border: 2px solid plum;
+.chat-box {
+	min-height: 3rem;
+	width: 60%;
+	background-color: whitesmoke;
+	margin-top: 0.5rem;
+	padding: 0 0.5rem 0 0.5rem;
 }
+
+.our-chat {
+	align-self: flex-start;
+	border-radius: 0.5rem 0.2rem 0.2rem 0;
+	background-color: mintcream;
+}
+
+.their-chat {
+	align-self: flex-end;
+	border-radius: 0.2rem 1rem 0 0.2rem;
+	background-color: greenyellow;
+}
+
+.footer-send-message {
+	grid-column: 1;
+	background-color: white;
+	border: 2px solid rgba(152, 193, 81, 0.4);
+	border-radius: 10px;
+	padding: 1rem;
+	margin: 0;
+	font-size: 1rem;
+}
+
+.footer-send-button {
+	grid-column: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.m_scroll_arrows
+{
+	display: block;
+	width: 0.7rem;
+	height: 0.7rem;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg); 
+	border-right: 0.3rem solid white;
+	border-bottom: 0.3rem solid white;
+	margin: 0.2rem 0.3rem 0 0;
+}
+
+.ikan
+{
+  margin-left: 0.1rem;
+}
+
+.ikan, .meji, .meta
+{
+    -webkit-animation: mouse-scroll 1s infinite;
+    -moz-animation: mouse-scroll 1s infinite;
+    animation: mouse-scroll 1s infinite;
+}
+
+.ikan
+{
+	-webkit-animation-delay: .1s;
+	-moz-animation-delay: .1s;
+	-webkit-animation-direction: alternate;
+	animation-direction: alternate;
+	animation-delay: alternate;
+}
+
+.meji
+{
+	-webkit-animation-delay: .2s;
+	-moz-animation-delay: .2s;
+	-webkit-animation-direction: alternate;
+	animation-delay: .2s;
+	animation-direction: alternate;
+	margin-left: -0.3rem;
+}
+
+.meta
+{
+	-webkit-animation-delay: .3s;
+	-moz-animation-delay: .3s;
+	-webkit-animation-direction: alternate;
+	animation-delay: .3s;
+	animation-direction: alternate;
+	margin-left: -0.3rem;
+}
+
+@-webkit-keyframes mouse-scroll {
+	0%   { opacity: 0;}
+	50%  { opacity: .5;}
+	100% { opacity: 1;}
+}
+@-moz-keyframes mouse-scroll {
+	0%   { opacity: 0; }
+	50%  { opacity: .5; }
+	100% { opacity: 1; }
+}
+@-o-keyframes mouse-scroll {
+	0%   { opacity: 0; }
+	50%  { opacity: .5; }
+	100% { opacity: 1; }
+}
+@keyframes mouse-scroll {
+	0%   { opacity: 0; }
+	50%  { opacity: .5; }
+	100% { opacity: 1; }
+}
+  
+  
+  

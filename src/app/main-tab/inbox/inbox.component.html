@@ -35,7 +35,9 @@
 	<main class="main-body" *ngIf="connections.length > 0; else showEmpty">
 		<section *ngFor="let connection of connections">
 			<section class="contact-card">
-				<section class="contact-icon"><img src="../../../assets/unite-logo-2.svg"></section>
+				<section class="contact-icon">
+					<img class="small-image" src="../../../assets/ios-contact.svg"> 
+				</section>
 				<section class="contact-details">
 					<a [routerLink]="['/conversation', connection.firstname]">
 						<strong>{{connection.firstname}} {{connection.surname}}</strong>

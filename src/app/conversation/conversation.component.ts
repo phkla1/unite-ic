@@ -21,16 +21,17 @@ export class ConversationComponent implements OnInit {
 		this.route.paramMap.subscribe(
 			params => {
 				this.userId = params.get('userId');
-				console.log("USER ID NOW SET TO :", this.userId)
+				console.log("USER ID NOW SET TO :", this.userId);
+				this.showMessages();
 			},
 			err => {},
 			() => {
-				this.showMessages();
 			}
 		);
 	}
 
 	showMessages() {
+		console.log("SHOW MESSAGES CALLED");
 		let sortedMessages = this.messages.sort((first, second) => second.messageId - first.messageId);
 		let container = Array.from(document.getElementsByClassName('messages'))[0] as HTMLElement;
 		console.log("CONTAINER IS:", container);
@@ -41,5 +42,9 @@ export class ConversationComponent implements OnInit {
 			message.from == 'me' ? elem.classList.add('our-chat') : elem.classList.add('their-chat')
 			container.appendChild(elem);	
 		});
+	}
+
+	adjustHeight() {
+		//will use this to automatically adjust height of textarea based on text entered
 	}
 }
