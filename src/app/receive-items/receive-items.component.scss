@@ -1,0 +1,20 @@
+.centered {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.inputs-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+input {
+	height: 3rem;
+	width: 4rem;
+	text-align: center;
+	font-size: 2rem;
+	margin: 1px;
+}

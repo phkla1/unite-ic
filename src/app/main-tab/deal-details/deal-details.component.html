@@ -1,0 +1,123 @@
+<section class="details-body bigger-font">
+	<main>
+		<section class="deal-detail-summary">
+			<img class="deal-banner" src="{{deal.dealBanner}}">
+			<section class="deal-header">
+				<span class="deal-product-name">{{deal.productName}}</span>
+				&#160;&#160;
+				<span class="deal-locality">{{deal.sellerLocality}}</span>	
+			</section>
+			<section class="deal-price">{{deal.unitPrice | currency : 'N'}} per {{deal.unit}}</section>
+			<section class="deal-discount">
+				<span class="retail-price">{{deal.retailPrice| currency : 'N'}}</span>
+				&#160;&#160;  {{deal.unitPrice| currency : 'N'}}
+				<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} off</span>
+			</section>
+		</section>
+
+		<section class="deal-detail-description-team">
+			<section class="goal-summary">
+				<span class="mission-header">YOUR MISSION:</span>
+				<span class="mission-text">
+					SECURE THIS PRICE by Unite-ing with others to buy a total of {{deal.dealTargetUnits}} {{deal.unit}}(s) before {{deal.deadline | date : 'fullDate' }}. 
+				</span>
+			</section>
+			<section class="deal-detail-countdown">
+				<section class="time-summary"> &#10163; {{ numberOfTeams() }} teams working on this goal</section>
+				<section class="time-left">9 days Left!</section>
+			</section>
+			<article class="deal-detail-description">
+				<h1>Description</h1>
+				<section class="basic-description">
+					Organic, freshly-picked Jos tomatoes. Farm to table. Tomatoes are low in calories, high in fiber, and are a good source of vitamin A, C, and B2. 
+				</section>
+				<section class="basic-terms-conditions">
+					Each paint contains at least 10 tomatoes, but exact quantity may vary depending on the particular harvest.
+				</section>
+			</article>
+
+			<section style="width: 100%;">
+				<h1>Teams to Join</h1>
+				<div *ngFor="let team of teams" class="team-status">
+					<img class="profile-icon" src="../../../assets/unite-logo-2.svg">
+					<div class="team-status-description">
+						<div class="team-status-description-name">
+							Team {{team.creator}}
+						</div>
+						<progress class="team-status-description-progress" max="10" value="5"></progress>
+						<div class="team-status-description-actions">
+							&#10163; Paid for {{numberOfTeamOrders(team.teamId)}} {{deal.unit}}(s)	
+						</div>
+					</div>
+					<div class="team-status-actions">
+						<div class="team-status-actions-button">
+							<button class="unite-button small-button" type="button" (click)="checkout(team.teamId)">Join Team</button>
+						</div>
+						<div class="team-status-actions-remainder"> {{deal.dealTargetUnits - numberOfTeamOrders(team.teamId)}} {{deal.unit}}(s) left</div>
+
+					</div>
+				</div>
+				<!-- <div class="team-status">
+					<img class="profile-icon" src="../../../assets/unite-logo-2.svg">
+					<div class="team-status-description">
+						<div class="team-status-description-name">
+							Wole's Team #885
+						</div>
+						<progress class="team-status-description-progress" max="10" value="8"></progress>
+						<div class="team-status-description-actions">
+							&#10163; Paid for 8 paints	
+						</div>
+					</div>
+					<div class="team-status-actions">
+						<div class="team-status-actions-button">
+							<button class="unite-button small-button" type="button">Join Team</button>
+						</div>
+						<div class="team-status-actions-remainder"> 2 paints left</div>
+					</div>
+				</div>
+				<div class="team-status">
+					<img class="profile-icon" src="../../../assets/unite-logo-2.svg">
+					<div class="team-status-description">
+						<div class="team-status-description-name">
+							Nene's Team #731
+						</div>
+						<progress class="team-status-description-progress" max="10" value="3"></progress>
+						<div class="team-status-description-actions">
+							&#10163; Paid for 3 paints	
+						</div>
+					</div>
+					<div class="team-status-actions">
+						<div class="team-status-actions-button">
+							<button class="unite-button small-button" type="button">Join Team</button>
+						</div>
+						<div class="team-status-actions-remainder"> 7 paints left</div>
+					</div>
+				</div> -->
+			</section>
+		</section>
+		<section class="more-deals"></section>
+	</main>
+
+	<section class="seller-profile-summary">
+		<img class="profile-icon seller-profile-summary-icon" src="../../../assets/ios-contact.svg">
+		<div class="seller-profile-summary-details">
+			<div class="seller-profile-summary-details-name">
+				{{deal.sellerName}}
+			</div>
+			<div class="seller-profile-summary-details-rating">
+				<span class="filled-star">&#9733;</span>
+				<span class="filled-star">&#9733;</span>
+				<span class="filled-star">&#9733;</span>
+				<span class="filled-star">&#9733;</span>
+				<span>&#9734;</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- <iframe src="./page1.html" seamless></iframe> -->
+
+	<footer class="floating-bottom-section">
+		<button class="unite-button-clear" type="button" (click)="checkout(false)">Buy Now (Escrow Protected)</button>	
+	</footer>
+
+</section>

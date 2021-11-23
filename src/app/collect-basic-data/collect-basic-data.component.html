@@ -10,16 +10,16 @@
 	</section>	
 
 	<section class="row page-message">
-		You're almost done. Please provide {{missingFields}} below:
+		One more step! Please provide {{missingFields}} below:
 	</section>
 	<br>
 
 	<form class="simple-form">
-		<input #firstname type="text" [style.visibility]="showFirstname" [required]="true" placeholder="Your first name">
+		<input #firstname type="text" [style.visibility]="showFirstname" [required]="true" placeholder="Your first name"/>
 		<br>
-		<input #surname type="text" [style.visibility]="showSurname" [required]="true" placeholder="Your surname">
+		<input #surname type="text" [style.visibility]="showSurname" [required]="true" placeholder="Your surname"/>
 		<br>
-		<input #phone type="tel" pattern="^([0-9]{11,})" [style.visibility]="showPhone" [required]="true" placeholder="Phone number">
+		<input #phone type="tel" pattern="^([0-9]{11,})" [style.visibility]="showPhone" [required]="true" placeholder="Phone number"/>
 		<br>
 	</form>
 

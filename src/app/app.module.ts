@@ -11,6 +11,11 @@ import { ModalbasicComponent } from './modalbasic/modalbasic.component';
 import {FormsModule} from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { ConversationComponent } from './conversation/conversation.component';
+import { FeaturedDealsComponent } from './main-tab/featured-deals/featured-deals.component';
+import { DealDetailsComponent } from './main-tab/deal-details/deal-details.component';
+import { BuyingOptionsComponent } from './buying-options/buying-options.component';
+import { ReceiveItemsComponent } from './receive-items/receive-items.component';
+import { TeamInboxComponent } from './team-inbox/team-inbox.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { ConversationComponent } from './conversation/conversation.component';
     LoginComponent,
     CollectBasicDataComponent,
     ModalbasicComponent,
-    ConversationComponent
+    ConversationComponent,
+    FeaturedDealsComponent,
+    DealDetailsComponent,
+    BuyingOptionsComponent,
+    ReceiveItemsComponent,
+    TeamInboxComponent
   ],
   imports: [
     BrowserModule,

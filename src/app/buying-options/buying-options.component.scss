@@ -1,0 +1,26 @@
+.purchase-type {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+	background-color: rgba(135, 51, 193, 0.1);
+}
+
+.checkout-table {
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+td {
+	text-align: center;
+}
+
+.checkout-buy-option {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input {
+	height: 3rem;
+	width: 5rem;
+}

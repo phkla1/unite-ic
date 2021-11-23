@@ -15,7 +15,7 @@ export class UniteICService {
 	currentIdentity : Identity;
 	DFX_NETWORK = null;
 	LOCAL_II_CANISTER = 'rwlgt-iiaaa-aaaaa-aaaaa-cai';
-	LOCAL_II_URL = "https://3bea-197-211-58-120.ngrok.io" + "?canisterId=" + this.LOCAL_II_CANISTER;
+	LOCAL_II_URL = "https://0561-45-91-22-21.ngrok.io" + "?canisterId=" + this.LOCAL_II_CANISTER;
 	iiLoggedIn	= false;
 	public loginSubject : Subject<boolean>;
 	public name = '';

@@ -11,6 +11,10 @@
 			<!-- developing on localhost: for whatever reason unless we load images on this login/landing page they will not show up on any other page...so we need to "preload" here-->
 			<div style="display: none;">
 				<img src="../assets/ios-contact.svg"> 	
+				<img src="../assets/apples-summary.png">
+				<img src="../assets/beef-summary.png">
+				<img src="../assets/corn-summary.png">
+				<img src="../assets/tomato-summary.png">
 			</div>
 		</section>	
 	
@@ -21,9 +25,9 @@
 		<section class="row middle-text"> OR </section>
 	
 		<section class="row traditional-login">
-			<input type="text" placeholder="Your phone number" [(ngModel)]="phone">
+			<input type="text" placeholder="Your phone number" [(ngModel)]="phone"/>
 			<br>
-			<input type="password" placeholder="Your 6-digit passcode" [(ngModel)]="password">
+			<input type="password" placeholder="Your 6-digit passcode" [(ngModel)]="password"/>
 			<br>
 			<button (click)="loginByName()" class="login-button" type="submit">LOGIN</button>
 		</section>

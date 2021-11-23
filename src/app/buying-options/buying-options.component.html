@@ -1,0 +1,44 @@
+<div>
+	<main>
+		<section *ngIf="order.type == 'wholesale'" class="purchase-type">
+			<label for="wholesale">
+				<input type="radio" name="quantity" id="wholesale" (change)="selectOption('wholesale')">
+				Buy Wholesale (Packs of {{deal.dealTargetUnits}} {{deal.unit}}s)
+			</label>
+			<label for="retail">
+				<input type="radio" name="quantity" id="retail" (change)="selectOption('retail')">
+				Buy a few and Unite with friends to meet the target
+			</label>
+		</section>
+
+		<h2 *ngIf="order.type == 'retail' && !newTeam">Place your order to join Team {{team.creator}}</h2>
+
+		<h2 *ngIf="order.type == 'retail' && newTeam">Place your order to create a new team</h2>
+
+		<section>
+			<table class="checkout-table" id="checkout-table">
+				<thead>
+					<tr>
+						<th>Quantity</th>
+						<th>Total</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input id="units" type="number" max="{{getMaxOfType()}}" min="1" (click)="updateUnits()"></td>
+						<td>{{curUnits}}</td>
+						<td>{{curUnits * deal.unitPrice}}</td>
+					</tr>
+				</tbody>
+			</table>	
+		</section>
+		<hr>
+		<section class="checkout-buy-option">
+			<button *ngIf="order.type == 'wholesale'" type="button" class="unite-button big-button wholesale-button" (click)="finalizePurchase()">Buy Now</button>
+			<!-- this flow is wrong for an invited user. An invited user should not have the option of choosing a team-->
+			<button *ngIf="order.type == 'retail' && newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy and Invite Friends (New Team)</button>
+			<button *ngIf="order.type == 'retail' &&!newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy & Join Team {{team.creator}}</button>
+		</section>
+	</main>
+</div>

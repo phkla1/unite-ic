@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
 					this.router.navigateByUrl('/collectData', {state : data});
 				}
 				else {
-					this.router.navigateByUrl('/inbox');
+					this.router.navigateByUrl('/deals');
 				}
 				/*
 				let console = document.getElementById('console');
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
 				value => {
 					if(value.firstname) {
 						this.uniteConnector.name = value.firstname;
-						this.router.navigateByUrl('/inbox');
+						this.router.navigateByUrl('/deals');
 					}
 					else {
 						console.log("EMPTY RECORD")

@@ -38,17 +38,16 @@ export class CollectBasicDataComponent implements OnInit {
 	}
 
 	completeRegistration(firstname, surname, phone) {
-		console.log("CONMPLETING REGISTRATION", firstname, surname, phone);
 		if(firstname && surname && phone) {
 			from(this.icConnector.updateRecord(firstname, surname, phone))
 			.subscribe(
 				data => {
-					console.log("DATA FROM IC:", data);
+//					console.log("DATA FROM IC:", data);
 					if(data) {
 						//inform Unite server about new registration, then goto inbox
 						this.uniteConnector.icRegister(this.record.callerId)
 						.subscribe();
-						this.router.navigateByUrl('/inbox');
+						this.router.navigateByUrl('/deals');
 					}
 					else {
 						this.router.navigateByUrl('/login');

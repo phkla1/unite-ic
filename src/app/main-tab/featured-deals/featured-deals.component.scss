@@ -1,0 +1,97 @@
+.deals-container {
+	display: grid;
+	grid-template-columns: repeat(2, 48%);
+	gap: 4vw 4vw;
+	grid-auto-flow: row;
+	margin: 3vw 6vw 3vw 6vw;
+}
+
+.deal-summary {
+	background: rgba(255, 192, 203, 0.1);
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+	border-radius: 1vw;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 40% 15% 10% 12.5% 10% 12.5%;
+}
+.deal-banner {
+	grid-row: 1;
+	object-fit: cover;
+	object-position: center;
+	height: 100%;
+	width: 100%;
+	border-radius: 1vw 1vw 0 0;
+}
+/*
+.deal-header {
+	grid-row: 2;
+	padding: 5% 5% 0 5%;
+}
+*/
+.deal-product-name {
+	grid-row: 2;
+	font-size: 1.5rem;
+	font-weight: bolder;
+	padding: 5% 5% 0 5%;
+}
+.deal-locality {
+	grid-row: 3;
+	font-weight: lighter;
+	font-style: italic;
+	padding: 0 5% 0 5%;
+}
+
+.deal-quantity-price {
+	grid-row: 4;
+	padding: 0 5% 0 5%;
+}
+.deal-text-highlight {
+	color : var(--highlight-color);
+	font-size: 1.5rem;
+	font-weight: bolder;
+}
+/*
+.deal-quantity {
+	font-size: 1rem;
+	font-style: italic;
+	font-weight: lighter;
+}
+*/
+
+.deal-discount {
+	grid-row: 5;
+	padding: 0% 5% 0% 5%;
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.2rem;
+}
+.retail-price {
+	text-decoration: line-through;
+	color: #787878;
+}
+.deal-discount-percentage {
+	color : var(--highlight-color);
+}
+.deal-countdown {
+	grid-row: 6;
+	padding: 0 5% 0 5%;
+	display: grid;
+	grid-template-columns: 10% 90%;
+}
+.time-icon {
+	vertical-align: middle;
+}
+.time-left {
+	padding-left: 10%;
+	vertical-align: middle;
+	color: red;
+	font-weight: bold;
+	font-size : 1.5rem;
+}
+
+.deal-inventory {
+	grid-row: 6;
+	padding: 0 5% 0 5%;
+	font-size: 1.2rem;
+	color: #787878;
+}
