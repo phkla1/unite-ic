@@ -4,6 +4,8 @@
 	gap: 4vw 4vw;
 	grid-auto-flow: row;
 	margin: 3vw 6vw 3vw 6vw;
+	max-width: 700px;
+	max-height: 700px;
 }
 
 .deal-summary {
@@ -22,17 +24,13 @@
 	width: 100%;
 	border-radius: 1vw 1vw 0 0;
 }
-/*
-.deal-header {
-	grid-row: 2;
-	padding: 5% 5% 0 5%;
-}
-*/
+
 .deal-product-name {
 	grid-row: 2;
 	font-size: 1.5rem;
 	font-weight: bolder;
 	padding: 5% 5% 0 5%;
+	max-height: 2rem;
 }
 .deal-locality {
 	grid-row: 3;
@@ -70,7 +68,8 @@
 	color: #787878;
 }
 .deal-discount-percentage {
-	color : var(--highlight-color);
+	color : red;
+	font-weight: bold;
 }
 .deal-countdown {
 	grid-row: 6;

@@ -15,12 +15,16 @@
 	display: grid;
 	grid-template-rows: repeat(8, 12.5vh);
 	grid-template-columns: repeat(12, 1fr);
+	margin: 5%;
+	max-width: 700px;
+	text-align: center;
 }
 
 .login-button {
 	border-radius: 8px;
 	width: 83.333333vw;
 	height: 7vh;
+	max-width: 700px;
 }
 
 .banner {

@@ -95,6 +95,8 @@ export class DealDetailsComponent implements OnInit {
 		},
 	];
 	totalOrders = 0;
+	today = new Date().getTime();
+	oneDay = 60 * 60 * 24 * 1000;
 
 	constructor(private activatedRoute: ActivatedRoute, private router: Router) { 
 		this.deal = new Object as Deal;

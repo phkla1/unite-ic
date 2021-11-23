@@ -71,7 +71,7 @@ export class BuyingOptionsComponent implements OnInit {
 	}
 
 	gotoInbox() {
-		this.router.navigateByUrl('/teambox');
+		this.router.navigateByUrl('/teambox', {state : this.team});
 	}
 
 }

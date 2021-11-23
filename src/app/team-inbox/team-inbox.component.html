@@ -2,7 +2,7 @@
 	<section class="messages-container">
 		<header>
 			<section class="header-logo">
-				<img class="small-image" src="../../../assets/ios-contact.svg">
+				<img class="small-image" src="../../assets/ios-contact.svg">
 			</section>
 			<section class="header-text">
 				Team {{team.creator}}
@@ -12,7 +12,7 @@
 		</section>
 		<footer>
 			<textarea id="sendMessage" class="footer-send-message" placeholder="type your message here" rows="1" maxlength="60" (keyup)="adjustHeight()"></textarea>
-			<div class="footer-send-button">
+			<div class="footer-send-button" (click)="sendMessage()">
 				<span class="m_scroll_arrows ikan"></span>
 				<span class="m_scroll_arrows meji"></span>
 				<span class="m_scroll_arrows meta"></span>	

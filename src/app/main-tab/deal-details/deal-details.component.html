@@ -11,7 +11,7 @@
 			<section class="deal-discount">
 				<span class="retail-price">{{deal.retailPrice| currency : 'N'}}</span>
 				&#160;&#160;  {{deal.unitPrice| currency : 'N'}}
-				<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} off</span>
+				<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</span>
 			</section>
 		</section>
 
@@ -24,7 +24,7 @@
 			</section>
 			<section class="deal-detail-countdown">
 				<section class="time-summary"> &#10163; {{ numberOfTeams() }} teams working on this goal</section>
-				<section class="time-left">9 days Left!</section>
+				<section class="time-left">{{(deal.deadline - today) / oneDay | number : '1.0'}} days Left!</section>
 			</section>
 			<article class="deal-detail-description">
 				<h1>Description</h1>
@@ -57,42 +57,6 @@
 
 					</div>
 				</div>
-				<!-- <div class="team-status">
-					<img class="profile-icon" src="../../../assets/unite-logo-2.svg">
-					<div class="team-status-description">
-						<div class="team-status-description-name">
-							Wole's Team #885
-						</div>
-						<progress class="team-status-description-progress" max="10" value="8"></progress>
-						<div class="team-status-description-actions">
-							&#10163; Paid for 8 paints	
-						</div>
-					</div>
-					<div class="team-status-actions">
-						<div class="team-status-actions-button">
-							<button class="unite-button small-button" type="button">Join Team</button>
-						</div>
-						<div class="team-status-actions-remainder"> 2 paints left</div>
-					</div>
-				</div>
-				<div class="team-status">
-					<img class="profile-icon" src="../../../assets/unite-logo-2.svg">
-					<div class="team-status-description">
-						<div class="team-status-description-name">
-							Nene's Team #731
-						</div>
-						<progress class="team-status-description-progress" max="10" value="3"></progress>
-						<div class="team-status-description-actions">
-							&#10163; Paid for 3 paints	
-						</div>
-					</div>
-					<div class="team-status-actions">
-						<div class="team-status-actions-button">
-							<button class="unite-button small-button" type="button">Join Team</button>
-						</div>
-						<div class="team-status-actions-remainder"> 7 paints left</div>
-					</div>
-				</div> -->
 			</section>
 		</section>
 		<section class="more-deals"></section>

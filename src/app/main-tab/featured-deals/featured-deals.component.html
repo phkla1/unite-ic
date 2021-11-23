@@ -1,32 +1,29 @@
-<!-- <HTML>
-	<head>
-		<title>Featured Deals Page </title>
-	 </head>--> 
-	 <section class="mid-font"> 
-		<header>
-			<input class="search-bar" type="text" placeholder="&#9906; Search Deals"/> 
-		</header>
-		<h1>Featured Team Deals</h1>
-		<main class="deals-container">
-			<section *ngFor="let deal of availableDeals">
-				<div class="deal-summary" (click)="showDeal(deal.dealId)">
-					<img class="deal-banner" src="{{deal.dealBanner}}">
-					<span class="deal-product-name">{{deal.productName}}</span>
-					<span class="deal-locality">{{deal.sellerLocality}}</span>	
-					<section class="deal-quantity-price">
-						<span class="deal-text-highlight">{{deal.unitPrice}} per {{deal.unit}}</span>
-					</section>
-					<section class="deal-discount">
-						<span class="retail-price">{{deal.retailPrice}}</span> 
-						&#160;&#160;  {{deal.unitPrice}}
-						<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} off</span>
-					</section>
-					<section class="deal-countdown">
-						<section class="time-icon">&#8986;</section>
-						<section class="time-left">{{daysLeft(deal.deadline)}} days Left!</section>
-					</section>
-				</div>
-			</section>
-		</main>
-	</section>
-<!--  </HTML> -->
+<section class="mid-font"> 
+	<header>
+		<input class="search-bar" type="text" placeholder="&#9906; Search Deals"/> 
+	</header>
+	<h1>Featured Team Deals</h1>
+	<main class="deals-container">
+		<section *ngFor="let deal of availableDeals">
+			<div class="deal-summary" (click)="showDeal(deal.dealId)">
+				<img class="deal-banner" src="{{deal.dealBanner}}">
+				<span class="deal-product-name">{{deal.productName}}</span>
+				<span class="deal-locality">{{deal.sellerLocality}}</span>	
+				<section class="deal-quantity-price">
+					<span class="deal-text-highlight">{{deal.unitPrice}} per {{deal.unit}}</span>
+				</section>
+
+				<section class="deal-discount">
+					<span class="retail-price">{{deal.retailPrice}}</span> 
+					&#160;&#160;  {{deal.unitPrice}}
+					<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</span>
+				</section>
+
+				<section class="deal-countdown">
+					<section class="time-icon">&#8986;</section>
+					<section class="time-left">{{daysLeft(deal.deadline)}} days Left!</section>
+				</section>
+			</div>
+		</section>
+	</main>
+</section>
