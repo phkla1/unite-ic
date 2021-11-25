@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UniteICService } from '../services/unite-ic.service';
 
 @Component({
 	selector: 'app-receive-items',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReceiveItemsComponent implements OnInit {
 
-	deliveryCode = 654123; //generated when an order is made, stored locally
+	deliveryCode = 0;
 
-	constructor() { }
+	constructor(private icService : UniteICService) { 
+		this.deliveryCode = this.icService.orderCode;
+	}
 
 	ngOnInit(): void {
 	}
@@ -17,8 +20,6 @@ export class ReceiveItemsComponent implements OnInit {
 	generateCode() {
 		let code = this.deliveryCode.toString().split('');
 		code.forEach((char, ind) => {
-			console.log("IND:", ind);
-			console.log("CHAR:", char);
 			(document.getElementById(ind.toString()) as HTMLInputElement).value = char;
 		});
 	}

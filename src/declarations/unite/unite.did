@@ -17,7 +17,39 @@ type UserId__1 = opt principal;
 type UserId = opt principal;
 type Timestamp__1 = int;
 type Timestamp = int;
+type Team = 
+ record {
+   creator: text;
+   orders: OrderList;
+   teamId: nat;
+ };
+type OrderList = vec nat;
+type Order = 
+ record {
+   dealId: nat;
+   orderId: nat;
+   orderType: text;
+   teamId: nat;
+   units: nat;
+   user: text;
+ };
 type GroupId = nat;
+type Deal = 
+ record {
+   deadline: int;
+   dealBanner: text;
+   dealDescription: text;
+   dealId: nat;
+   dealTargetUnits: nat;
+   productDescription: text;
+   productName: text;
+   retailPrice: nat;
+   sellerLocality: text;
+   sellerName: text;
+   totalInventoryBalance: nat;
+   unit: text;
+   unitPrice: nat;
+ };
 type Count = nat;
 type ContactField__1 = text;
 type ContactField = text;
@@ -36,6 +68,9 @@ service : {
   getLatestGroupChats: (Timestamp__1) -> (vec ChatMessage);
   getMyRecord: (text) -> (UserRecord);
   joinGroup: (GroupId) -> (bool);
+  listDeals: () -> (vec Deal);
+  listOrders: (nat) -> (vec Order);
+  listTeams: (nat) -> (vec Team);
   listUsers: (text) -> (vec UserRecord);
   nameLogin: (ContactField__1) -> (UserRecord);
   putChat: (ChatMessage) -> (nat);

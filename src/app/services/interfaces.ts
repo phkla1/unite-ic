@@ -18,7 +18,7 @@ export interface Deal {
 	unitPrice : number,
 	retailPrice : number,
 	dealTargetUnits : number,
-	deadline : number
+	deadline : number,
 	totalInventoryBalance : number,
 	sellerName : string
 };
@@ -28,8 +28,8 @@ export interface Order {
 	orderId : number,
 	teamId : number,
 	user : string,
-	units : number
-	type : string
+	units : number,
+	orderType : string
 };
 export interface Team {
 	teamId : number,

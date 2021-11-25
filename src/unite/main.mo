@@ -30,6 +30,9 @@ actor {
 	type UserGroup = Types.UserGroup;
 	type UserGroupEntry = Types.UserGroupEntry;
 	type GroupId = Types.GroupId;
+	type Deal = Types.Deal;
+	type Team = Types.Team;
+	type Order = Types.Order;
 
 	var userDatabase : [UserRecord] = []; 
 	var chatDatabase : [ChatMessage] = [];
@@ -37,6 +40,215 @@ actor {
 	var sysGroup : UserGroup = {creator = null; groupId = 0; name = "system";};
 	var groupDatabase : [UserGroup] = [sysGroup];
 	var usersGroupsDatabase : [UserGroupEntry] = [];
+	var	today : Int = Time.now() / 1000000;
+	var oneDay : Nat = 60 * 60 * 24 * 1000;
+	var dealDatabase : [Deal] = [
+	{
+		dealId = 1;
+		dealBanner = "../assets/tomato-summary.png";
+		productName = "Big, Juicy Jos Tomatoes";
+		productDescription= "Organic, freshly-picked Jos tomatoes. Farm to table. Tomatoes are low in calories, high in fiber, and are a good source of vitamin A, C, and B2.";
+		dealDescription = "Minimum order 1 paint. Each paint contains 10-12 fresh tomatoes depending on size & harvest.";
+		sellerLocality = "Lekki";
+		unit = "Paint";
+		unitPrice = 2000;
+		retailPrice = 3000;
+		dealTargetUnits = 10;
+		deadline = today + 5 * oneDay;
+		totalInventoryBalance = 50;
+		sellerName = "Moji Alabi"	
+	},
+	{
+		dealId = 2;
+		dealBanner = "../assets/apples-summary.png"; 
+		productName = "Fresh Organic Red Apples";
+		productDescription= "Benin red apples. Grown with only organic and natural fertilizers.";
+		dealDescription = "Minimum order 1 pack. Each pack contains 10 apples";
+		sellerLocality = "Lekki";
+		unit = "Pack";
+		unitPrice = 1000;
+		retailPrice = 2000;
+		dealTargetUnits = 10;
+		deadline = today + 7 * oneDay;
+		totalInventoryBalance = 50;
+		sellerName = "Taiwo Adegoke"
+	},	
+	{
+		dealId = 3;
+		dealBanner = "../assets/beef-summary.png"; 
+		productName = "High Quality Beef";
+		productDescription= "Organic longhorn cattle. Freshly slaughtered.";
+		dealDescription = "Minimum order 10KG";
+		sellerLocality = "Lekki";
+		unit = "10KG";
+		unitPrice = 15000;
+		retailPrice = 26000;
+		dealTargetUnits = 5;
+		deadline = today + 6 * oneDay;
+		totalInventoryBalance = 50;
+		sellerName = "Oseni Moruf"	
+	},
+	{
+		dealId = 4;
+		dealBanner = "../assets/corn-summary.png";
+		productName = "Fresh Soft Corn";
+		productDescription= "Freshly harvested corn from our farm in Epe";
+		dealDescription = "Minimum order 20 Ears";
+		sellerLocality = "Lekki";
+		unit = "Ear";
+		unitPrice = 1800;
+		retailPrice = 2000;
+		dealTargetUnits = 200;
+		deadline = today + 3 * oneDay;
+		totalInventoryBalance = 1000;
+		sellerName = "Hakeem Folami"	
+	}];
+
+	var teamDatabase : [Team] = [
+	{
+		teamId = 1;
+		creator = "Aisha";
+		orders = [1 , 2];
+	},
+	{
+		teamId = 2;
+		creator = "Wole";
+		orders = [3, 4];
+	},
+	{
+		teamId = 3;
+		creator = "Nene";
+		orders = [5, 6, 7, 8];
+	},
+	{
+		teamId = 4;
+		creator = "Mfon";
+		orders = [9, 10];
+	},
+	{
+		teamId = 5;
+		creator = "Jaja";
+		orders = [11];
+	},
+	{
+		teamId = 6;
+		creator = "Agogo";
+		orders = [12, 13, 14];
+	}];
+
+	var orderDatabase : [Order] = [
+	{
+		dealId = 1;
+		orderId = 1;
+		teamId = 1;
+		user = "Aisha";
+		units = 5;
+		orderType = "retail";
+	},
+	{
+		dealId = 1;
+		orderId = 2;
+		teamId = 1;
+		user = "Fife";
+		units = 1;
+		orderType = "retail";
+	},
+	{
+		dealId = 1;
+		orderId = 3;
+		teamId = 2;
+		user = "Wole";
+		units = 3;
+		orderType = "retail";
+	},
+	{
+		dealId = 1;
+		orderId = 4;
+		teamId = 2;
+		user = "Gboyega";
+		units = 3;
+		orderType = "retail";
+	},
+	{
+		dealId = 1;
+		orderId = 5;
+		teamId = 3;
+		user = "Nene";
+		units = 4;
+		orderType = "retail";
+	},
+	{
+		dealId = 1;
+		orderId = 6;
+		teamId = 3;
+		user = "Nkiru";
+		units = 1;
+		orderType = "retail";
+	},
+	{
+		dealId = 1;
+		orderId = 7;
+		teamId = 3;
+		user = "John";
+		units = 1;
+		orderType = "retail";
+	},
+	{
+		dealId = 1;
+		orderId = 8;
+		teamId = 3;
+		user = "Joyin";
+		units = 1;
+		orderType = "retail";
+	},
+	{
+		dealId = 2;
+		orderId = 9;
+		teamId = 4;
+		user = "Mfon";
+		units = 3;
+		orderType = "retail";
+	},
+	{
+		dealId = 2;
+		orderId = 10;
+		teamId = 4;
+		user = "Oke";
+		units = 1;
+		orderType = "retail";
+	},
+	{
+		dealId = 2;
+		orderId = 11;
+		teamId = 5;
+		user = "Jaja";
+		units = 2;
+		orderType = "retail";
+	},
+	{
+		dealId = 3;
+		orderId = 12;
+		teamId = 6;
+		user = "Agogo";
+		units = 2;
+		orderType = "retail";
+	},
+	{
+		dealId = 3;
+		orderId = 13;
+		teamId = 6;
+		user = "Doctor";
+		units = 2;
+		orderType = "retail";
+	},
+	{
+		dealId = 3;
+		orderId = 14;
+		teamId = 6;
+		user = "Emeka";
+		units = 2;
+		orderType = "retail";
+	}];
 
 	//check whether user has access. For now this just checks that the user is registered.
 	func hasAccess(user : UserId) : Bool {
@@ -63,7 +275,7 @@ actor {
 		return user;
 	};
 
-	//DELETE THIS
+	//DELETE THIS BEFORE GOING LIVE...
 	func getUserRecordByName(name: ContactField) : ?UserRecord {
 		func userExists(user: UserRecord): Bool { user.firstname == name };
 		var user : ?UserRecord = Array.find<UserRecord>(userDatabase, userExists);
@@ -371,6 +583,42 @@ actor {
 			return [];
 		};
 	};
+
+	public shared(msg) func listDeals() : async [Deal] {
+		return dealDatabase;
+	};
+
+	public shared(msg) func listTeams(dealId : Nat) : async [Team] {
+		//filter orders by dealId
+		func filterOrdersByDeal(order : Order): Bool { order.dealId == dealId };
+		var ordersOfDeal : [Order] = Array.filter<Order>(orderDatabase, filterOrdersByDeal);
+		//get all team data from the order.teamId
+		var allTeams : [Team] = [];
+
+		for(order in ordersOfDeal.vals()) {
+			switch(Array.find<Team>(allTeams, func (team : Team) : Bool {team.teamId == order.teamId})) {
+				case(null) {
+					//add team entry with this order in the team list
+					//find the team with teamId = order.teamId
+					func getTeamById(team : Team) : Bool {team.teamId == order.teamId}; 
+					var thisTeam = Option.unwrap<Team>(Array.find<Team>(teamDatabase, getTeamById));
+					allTeams := Array.append(allTeams, [thisTeam]); 
+				};
+				case(_) {};
+			};
+		};
+		Console.print(debug_show("ALL TEAMS:", allTeams));
+		allTeams
+	};
+
+	public shared(msg) func listOrders(dealId : Nat) : async [Order] {
+		//filter orders by dealId
+		func filterOrdersByDeal(order : Order): Bool { order.dealId == dealId };
+		var ordersOfDeal : [Order] = Array.filter<Order>(orderDatabase, filterOrdersByDeal);
+		Console.print(debug_show("ORDERS****:", ordersOfDeal));
+		ordersOfDeal
+	};
+
 
 /*
     public shared query(msg) func http_request(request : HttpRequest) : async HttpResponse {

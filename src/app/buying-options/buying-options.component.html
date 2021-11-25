@@ -1,6 +1,6 @@
 <div>
 	<main>
-		<section *ngIf="order.type == 'wholesale'" class="purchase-type">
+		<section *ngIf="order.orderType == 'wholesale'" class="purchase-type">
 			<label for="wholesale">
 				<input type="radio" name="quantity" id="wholesale" (change)="selectOption('wholesale')">
 				Buy Wholesale (Packs of {{deal.dealTargetUnits}} {{deal.unit}}s)
@@ -11,9 +11,9 @@
 			</label>
 		</section>
 
-		<h2 *ngIf="order.type == 'retail' && !newTeam">Place your order to join Team {{team.creator}}</h2>
+		<h2 *ngIf="order.orderType == 'retail' && !newTeam">Place your order to join Team {{team.creator}}</h2>
 
-		<h2 *ngIf="order.type == 'retail' && newTeam">Place your order to create a new team</h2>
+		<h2 *ngIf="order.orderType == 'retail' && newTeam">Place your order to create a new team</h2>
 
 		<section>
 			<table class="checkout-table" id="checkout-table">
@@ -35,10 +35,10 @@
 		</section>
 		<hr>
 		<section class="checkout-buy-option">
-			<button *ngIf="order.type == 'wholesale'" type="button" class="unite-button big-button wholesale-button" (click)="finalizePurchase()">Buy Now</button>
+			<button *ngIf="order.orderType == 'wholesale'" type="button" class="unite-button big-button wholesale-button" (click)="finalizePurchase()">Buy Now</button>
 			<!-- this flow is wrong for an invited user. An invited user should not have the option of choosing a team-->
-			<button *ngIf="order.type == 'retail' && newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy and Invite Friends (New Team)</button>
-			<button *ngIf="order.type == 'retail' &&!newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy & Join Team {{team.creator}}</button>
+			<button *ngIf="order.orderType == 'retail' && newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy and Invite Friends (New Team)</button>
+			<button *ngIf="order.orderType == 'retail' &&!newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy & Join Team {{team.creator}}</button>
 		</section>
 	</main>
 </div>

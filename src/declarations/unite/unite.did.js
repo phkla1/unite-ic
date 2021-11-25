@@ -20,6 +20,35 @@ export const idlFactory = ({ IDL }) => {
     'timestamp' : Timestamp,
   });
   const GroupId = IDL.Nat;
+  const Deal = IDL.Record({
+    'dealBanner' : IDL.Text,
+    'retailPrice' : IDL.Nat,
+    'dealTargetUnits' : IDL.Nat,
+    'unit' : IDL.Text,
+    'dealId' : IDL.Nat,
+    'deadline' : IDL.Int,
+    'productName' : IDL.Text,
+    'totalInventoryBalance' : IDL.Nat,
+    'dealDescription' : IDL.Text,
+    'sellerName' : IDL.Text,
+    'sellerLocality' : IDL.Text,
+    'unitPrice' : IDL.Nat,
+    'productDescription' : IDL.Text,
+  });
+  const Order = IDL.Record({
+    'user' : IDL.Text,
+    'dealId' : IDL.Nat,
+    'orderType' : IDL.Text,
+    'orderId' : IDL.Nat,
+    'units' : IDL.Nat,
+    'teamId' : IDL.Nat,
+  });
+  const OrderList = IDL.Vec(IDL.Nat);
+  const Team = IDL.Record({
+    'creator' : IDL.Text,
+    'orders' : OrderList,
+    'teamId' : IDL.Nat,
+  });
   const ContactField__1 = IDL.Text;
   const UserRecordAddendum = IDL.Record({
     'firstname' : ContactField,
@@ -42,6 +71,9 @@ export const idlFactory = ({ IDL }) => {
       ),
     'getMyRecord' : IDL.Func([IDL.Text], [UserRecord], []),
     'joinGroup' : IDL.Func([GroupId], [IDL.Bool], []),
+    'listDeals' : IDL.Func([], [IDL.Vec(Deal)], []),
+    'listOrders' : IDL.Func([IDL.Nat], [IDL.Vec(Order)], []),
+    'listTeams' : IDL.Func([IDL.Nat], [IDL.Vec(Team)], []),
     'listUsers' : IDL.Func([IDL.Text], [IDL.Vec(UserRecord)], []),
     'nameLogin' : IDL.Func([ContactField__1], [UserRecord], []),
     'putChat' : IDL.Func([ChatMessage], [IDL.Nat], []),

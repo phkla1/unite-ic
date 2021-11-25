@@ -4,7 +4,7 @@
 	</header>
 	<h1>Featured Team Deals</h1>
 	<main class="deals-container">
-		<section *ngFor="let deal of availableDeals">
+		<section *ngFor="let deal of dealSubject$ | async">
 			<div class="deal-summary" (click)="showDeal(deal.dealId)">
 				<img class="deal-banner" src="{{deal.dealBanner}}">
 				<span class="deal-product-name">{{deal.productName}}</span>
@@ -14,14 +14,14 @@
 				</section>
 
 				<section class="deal-discount">
-					<span class="retail-price">{{deal.retailPrice}}</span> 
-					&#160;&#160;  {{deal.unitPrice}}
+					<span class="retail-price">{{deal.retailPrice | currency : 'N'}}</span> 
+					&#160;&#160;  {{deal.unitPrice | currency : 'N'}}
 					<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</span>
 				</section>
 
 				<section class="deal-countdown">
 					<section class="time-icon">&#8986;</section>
-					<section class="time-left">{{daysLeft(deal.deadline)}} days Left!</section>
+					<section class="time-left">{{daysLeft(deal.deadline) | number : '1.0-0'}} days Left!</section>
 				</section>
 			</div>
 		</section>

@@ -11,6 +11,7 @@ module {
 	public type Timestamp = Time.Time;
 	public type UserId = ?Principal ;
 	public type Vertex = Principal;
+	public type OrderList = [Nat];
 
   	public type UserRecord = {
 		callerId : UserId;
@@ -49,6 +50,37 @@ module {
 	public type UserGroupEntry = {
 		groupId : GroupId;
 		userId : UserId;
+	};
+
+	public type Deal = {
+		dealId : Nat;
+		dealBanner : Text;
+		productName : Text;
+		productDescription: Text;
+		dealDescription : Text;
+		sellerLocality : Text;
+		unit : Text;
+		unitPrice : Nat;
+		retailPrice : Nat;
+		dealTargetUnits : Nat;
+		deadline : Int;
+		totalInventoryBalance : Nat;
+		sellerName : Text;
+	};
+
+	public type Team = {
+		teamId : Nat;
+		creator : Text;
+		orders : OrderList;
+	};
+
+	public type Order = {
+		dealId : Nat;
+		orderId : Nat;
+		teamId : Nat;
+		user : Text;
+		units : Nat;
+		orderType : Text;
 	};
 /*
     public type HeaderField = (Text, Text);

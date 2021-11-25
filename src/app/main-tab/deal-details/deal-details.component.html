@@ -23,8 +23,8 @@
 				</span>
 			</section>
 			<section class="deal-detail-countdown">
-				<section class="time-summary"> &#10163; {{ numberOfTeams() }} teams working on this goal</section>
-				<section class="time-left">{{(deal.deadline - today) / oneDay | number : '1.0'}} days Left!</section>
+				<section class="time-summary"> &#10163; {{ numOfTeams==0 ? "***" : numOfTeams }}  teams working on this goal</section>
+				<section class="time-left">{{daysLeft(deal.deadline) | number : '1.0-0' }} days Left!</section>
 			</section>
 			<article class="deal-detail-description">
 				<h1>Description</h1>
@@ -38,7 +38,7 @@
 
 			<section style="width: 100%;">
 				<h1>Teams to Join</h1>
-				<div *ngFor="let team of teams" class="team-status">
+				<div *ngFor="let team of teams$ | async" class="team-status">
 					<img class="profile-icon" src="../../../assets/unite-logo-2.svg">
 					<div class="team-status-description">
 						<div class="team-status-description-name">
@@ -46,14 +46,16 @@
 						</div>
 						<progress class="team-status-description-progress" max="10" value="5"></progress>
 						<div class="team-status-description-actions">
-							&#10163; Paid for {{numberOfTeamOrders(team.teamId)}} {{deal.unit}}(s)	
+							&#10163; Paid for {{ numOfTeamUnits[team.teamId] }} {{deal.unit}}(s)	
 						</div>
 					</div>
 					<div class="team-status-actions">
 						<div class="team-status-actions-button">
 							<button class="unite-button small-button" type="button" (click)="checkout(team.teamId)">Join Team</button>
 						</div>
-						<div class="team-status-actions-remainder"> {{deal.dealTargetUnits - numberOfTeamOrders(team.teamId)}} {{deal.unit}}(s) left</div>
+						<div class="team-status-actions-remainder"> 
+							<!-- {{balanceLeft$(team.teamId) | async}}  -->
+							{{deal.unit}}(s) left</div>
 
 					</div>
 				</div>
@@ -77,8 +79,6 @@
 			</div>
 		</div>
 	</section>
-
-	<!-- <iframe src="./page1.html" seamless></iframe> -->
 
 	<footer class="floating-bottom-section">
 		<button class="unite-button-clear" type="button" (click)="checkout(false)">Buy Now (Escrow Protected)</button>	

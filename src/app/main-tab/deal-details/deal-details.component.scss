@@ -65,9 +65,11 @@
 .time-summary {
 	grid-column: 1;
 	color: blue;
+	text-align: left;
 }
 .time-left {
 	grid-column: 2;
+	text-align: right;
 }
 .description-header {
 	font-size: larger;

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { from } from 'rxjs';
-import { scan } from 'rxjs/operators';
+import { from, of, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { find, map, mergeMap, scan, switchMap, takeLast, tap } from 'rxjs/operators';
+import { UniteICService } from 'src/app/services/unite-ic.service';
 import { Deal, Team, Order } from '../../services/interfaces';
 
 @Component({
@@ -9,130 +10,112 @@ import { Deal, Team, Order } from '../../services/interfaces';
 	templateUrl: './deal-details.component.html',
 	styleUrls: ['./deal-details.component.scss']
 })
-export class DealDetailsComponent implements OnInit {
+export class DealDetailsComponent implements OnInit, OnDestroy {
 	deal : Deal;
-	teams : Team[] = [
-		{
-			teamId : 1,
-			creator : 'Aisha',
-			orders : [1 , 2]
-		},
-		{
-			teamId : 2,
-			creator : 'Wole',
-			orders : [3, 4]
-		},
-		{
-			teamId : 3,
-			creator : 'Nene',
-			orders : [5, 6, 7, 8]
-		},
-	];
-	orders : Order[] = [
-		{
-			dealId : 1,
-			orderId : 1,
-			teamId : 1,
-			user : "Aisha",
-			units : 5,
-			type : 'retail'
-		},
-		{
-			dealId : 1,
-			orderId : 2,
-			teamId : 1,
-			user : "Fife",
-			units : 1,
-			type : 'retail'
-		},
-		{
-			dealId : 1,
-			orderId : 3,
-			teamId : 2,
-			user : "Wole",
-			units : 3,
-			type : 'retail'
-		},
-		{
-			dealId : 1,
-			orderId : 4,
-			teamId : 2,
-			user : "Gboyega",
-			units : 3,
-			type : 'retail'
-		},
-		{
-			dealId : 1,
-			orderId : 5,
-			teamId : 3,
-			user : "Nene",
-			units : 4,
-			type : 'retail'
-		},
-		{
-			dealId : 1,
-			orderId : 6,
-			teamId : 3,
-			user : "Nkiru",
-			units : 1,
-			type : 'retail'
-		},
-		{
-			dealId : 1,
-			orderId : 7,
-			teamId : 3,
-			user : "John",
-			units : 1,
-			type : 'retail'
-		},
-		{
-			dealId : 1,
-			orderId : 8,
-			teamId : 3,
-			user : "Joyin",
-			units : 1,
-			type : 'retail'
-		},
-	];
-	totalOrders = 0;
-	today = new Date().getTime();
-	oneDay = 60 * 60 * 24 * 1000;
+	teams$ : Subject<Team[]>; //teams on this deal
+	orders$ : Subject<Order[]>; //orders for this deal
+	allSubs : Subscription;
+	numOfTeams = 0;
+	numOfTeamUnits = {};
 
-	constructor(private activatedRoute: ActivatedRoute, private router: Router) { 
+	constructor(private activatedRoute: ActivatedRoute, private router: Router, private icService : UniteICService) { 
 		this.deal = new Object as Deal;
+		this.allSubs = new Subscription();
 	}
 
 	ngOnInit(): void {
-		this.activatedRoute.paramMap.subscribe(
+		let sub = this.activatedRoute.paramMap.subscribe(
 			() => {
 				this.deal = window.history.state;
+				this.icService.getTeams(this.deal.dealId); 
+				this.teams$ = this.icService.teamSubject$;
+				this.icService.getOrders(this.deal.dealId); 
+				this.orders$ = this.icService.orderSubject$;
+				this.numberOfTeams$().subscribe();
+				this.numberOfTeamUnits$().subscribe();
 			}
+		);
+		this.allSubs.add(sub);
+	}
+
+	numberOfTeams$() {
+		return this.orders$.pipe(
+			map((orders : Order[]) => {
+				let count = {};
+				orders.forEach(order => {
+					if(order.dealId === this.deal.dealId) {
+						count[order.teamId] ? count[order.teamId]++ : count[order.teamId] = 1; 
+					}	
+				});
+				this.numOfTeams = Object.keys(count).length; 
+				return Object.keys(count).length;
+			}),
 		);
 	}
 
-	numberOfTeams() {
-		//get all teams working on this deal (via orders) and return count
-		let count = {};
-		this.orders.forEach(order => {
-			if(order.dealId === this.deal.dealId) {
-				count[order.teamId] ? count[order.teamId]++ : count[order.teamId] = 1; 
-			}
-		});
-		return Object.keys(count).length;
+	numberOfTeamUnits$() {
+		return this.teams$.pipe(
+			mergeMap((teams: Team[]) => {
+				console.log("PROCESSING: TEAMS:", teams);
+				let count = {};
+				//foreach team get units for all orders in the array 
+				return this.orders$.pipe(
+					map((orders:Order[]) => {
+				console.log("PROCESSING: ORDERS:", orders);
+						teams.forEach(team => {
+							team.orders.forEach(orderId => {
+								let units = orders.find(elem => elem.orderId == orderId).units;
+								count[team.teamId] = count[team.teamId] ? count[team.teamId] + units : units; 
+							})
+						});
+						console.log("FINAL COUNT IS:", count);
+						this.numOfTeamUnits = count;
+						return count;
+					})
+				);
+			}),
+		);
 	}
 
-	numberOfTeamOrders(teamId : number) {
-		//get the list of orders made by the team
-		//find details of each order and add the units to the total
-		let total = 0;
-		this.teams.find(team => team.teamId == teamId).orders.forEach(orderId => {
-			total += this.orders.find(order => order.orderId == orderId).units;
-		});
-		this.totalOrders = total;
-		return total;	
+	// balanceLeft$(teamId) {
+	// 	return of(teamId).pipe(
+	// 		switchMap(teamId => {
+	// 			return this.numberOfTeamOrders$(teamId)
+	// 		}),
+	// 		map(total => this.deal.dealTargetUnits - total)
+	// 	);
+	// }
+
+	daysLeft(datems) : number {
+		return this.icService.daysLeft(datems);
 	}
 
 	checkout(teamId) {
+		let sub = of(teamId).pipe(
+			switchMap(teamId => {
+				if(teamId) {
+					let team ;
+					return this.teams$.pipe(
+						switchMap((teams : Team[]) => {
+							team = teams.find(team => team.teamId == teamId);	
+							return this.numberOfTeamUnits$().pipe(
+//							return this.numberOfTeamOrders$(teamId).pipe(
+								map(totalOrders => {
+									return {team : team, totalOrders : totalOrders, deal : this.deal};
+								})
+							)
+						})
+					);
+				}
+				else {
+					return of({team : false, totalOrders : 0, deal : this.deal})
+				}
+			})
+		).subscribe(
+			data => this.router.navigateByUrl('/checkout', {state : data}) 
+		);
+		this.allSubs.add(sub);
+		/*
 		let team = teamId ? this.teams.find(team => team.teamId == teamId) : false;
 		let totalOrders = teamId ? this.numberOfTeamOrders(teamId) : 0; 
 		let state = {
@@ -141,5 +124,11 @@ export class DealDetailsComponent implements OnInit {
 			totalOrders : totalOrders 
 		};
 		this.router.navigateByUrl('/checkout', {state : state});
+		*/
+	}
+
+	ngOnDestroy() {
+		console.log("ON DESTROY")
+		this.allSubs.unsubscribe();
 	}
 }
