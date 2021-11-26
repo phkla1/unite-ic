@@ -6,17 +6,17 @@
 	<main class="deals-container">
 		<section *ngFor="let deal of dealSubject$ | async">
 			<div class="deal-summary" (click)="showDeal(deal.dealId)">
-				<img class="deal-banner" src="{{deal.dealBanner}}">
+				<img class="deal-banner" src="{{deal.dealBanner}}" alt="Image loading...pls wait">
 				<span class="deal-product-name">{{deal.productName}}</span>
 				<span class="deal-locality">{{deal.sellerLocality}}</span>	
 				<section class="deal-quantity-price">
-					<span class="deal-text-highlight">{{deal.unitPrice}} per {{deal.unit}}</span>
+					<span class="deal-text-highlight">Only {{deal.unitPrice | currency : 'N'}} per {{deal.unit}} !!</span>
 				</section>
 
 				<section class="deal-discount">
 					<span class="retail-price">{{deal.retailPrice | currency : 'N'}}</span> 
 					&#160;&#160;  {{deal.unitPrice | currency : 'N'}}
-					<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</span>
+					<span class="deal-discount-percentage"><mark>{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</mark></span>
 				</section>
 
 				<section class="deal-countdown">

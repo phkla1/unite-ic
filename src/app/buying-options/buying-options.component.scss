@@ -5,6 +5,10 @@
 	background-color: rgba(135, 51, 193, 0.1);
 }
 
+.bigger-font {
+	font-size: 5vh;
+}
+
 .checkout-table {
 	width: 100%;
 	margin-bottom: 2rem;
@@ -21,6 +25,13 @@ td {
 }
 
 input {
-	height: 3rem;
-	width: 5rem;
+	height: 50px;
+	width: 70px;
+	font-size: 5vh;
+}
+
+@media  only screen and (min-width : 600px) {
+	.bigger-font {
+		font-size: 33px;
+	}	
 }

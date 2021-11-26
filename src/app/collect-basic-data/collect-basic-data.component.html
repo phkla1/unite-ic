@@ -1,16 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unite!</title>
-    <base href="/">
-</head>
-<body class="data-page">
+<main class="data-page">
 	<section class="row banner">
 	</section>	
 
 	<section class="row page-message">
-		One more step! Please provide {{missingFields}} below:
+		One more step! Please provide some basic info about yourself:
 	</section>
 	<br>
 
@@ -24,8 +17,6 @@
 	</form>
 
 	<section class="row submit-button" id="console">
-		<button class="clear-button" type="submit" (click)="completeRegistration(firstname.value, surname.value, phone.value)">Complete My Registration</button>
+		<button class="unite-button big-button" type="submit" (click)="completeRegistration(firstname.value, surname.value, phone.value)">Complete My Registration</button>
 	</section>
-
-</body>
-</html>
+</main>

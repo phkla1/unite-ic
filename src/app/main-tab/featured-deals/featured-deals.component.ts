@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { UniteICService } from 'src/app/services/unite-ic.service';
 import {Deal} from '../../services/interfaces'; 
 

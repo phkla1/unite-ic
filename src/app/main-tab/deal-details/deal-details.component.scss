@@ -1,5 +1,8 @@
+h2 {
+	margin-left: 0%;
+}
 .bigger-font {
-	font-size: 4vw;
+	font-size: 5vh;
 }
 
 .details-body {
@@ -36,7 +39,7 @@
 .deal-detail-summary {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 55% 20% 12.5% 12.5%;
+	grid-template-rows: 55% 20% 15% ;
 }
 .deal-banner {
 	grid-row: 1;
@@ -52,15 +55,18 @@
 }
 
 .deal-detail-description-team {
-	padding: 0 5% 0 5%;
+	padding: 1% 0% 0% 0%;
+	margin-bottom: 5%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
+	column-gap: 1rem;
+	row-gap: 1rem;
 }
 .deal-detail-countdown {
 	display: grid;
 	grid-template-columns: 57% 43%;
+	width: 100%;
 }
 .time-summary {
 	grid-column: 1;
@@ -70,6 +76,8 @@
 .time-left {
 	grid-column: 2;
 	text-align: right;
+	color: red;
+	font-weight: bold;
 }
 .description-header {
 	font-size: larger;
@@ -79,15 +87,22 @@
 .team-status {
 	width : 100%;
 	display : grid;
-	grid-template-columns: 20% 50% 30%;	
+	grid-template-columns: 15% 50% 35%;	
 	border-bottom: 1px solid lightgray;
 	margin: 1rem;
 }
+
+.join-button {
+	font-size: 2.3rem;
+	border-radius : 1.7rem;
+	height : 4rem;
+}
+
 .profile-icon {
 	grid-column: 1;
 	flex-direction: column;
 	align-items: center;
-	border-radius: 50%;
+	border-radius: 30%;
 	max-width: 100%;
 }
 .team-status-description {
@@ -103,6 +118,7 @@
 
 .team-status-description-name {
 	grid-row: 1;
+	text-align: center;
 }
 .team-status-description-progress {
 	grid-row: 2;
@@ -110,6 +126,7 @@
 }
 .team-status-description-actions {
 	grid-row: 3;
+	text-align: center;
 }
 
 .team-status-actions-button {
@@ -133,13 +150,13 @@
 
 .unite-button-clear {
 	color: var(--highlight-color);
-	font-size: 1.3rem;
+	font-size: 2.5rem;
 	background-color: white;
 	border: 0.2rem solid var(--highlight-color);
-	border-radius: 0.3rem;
+	border-radius: 0.7rem;
 	padding: 0.1rem;
 	width: 80%;
-	height: 3.5rem;
+	height: 5rem;
 }
 
 .floating-bottom-section {
@@ -188,9 +205,32 @@ iframe[seamless] {
 	border: none;
 }
 
+.deal-discount-percentage {
+	padding-left: 1%;
+}
+
+mark {
+	background-color: yellow;
+}
+.retail-price {
+	text-decoration: line-through;
+}
+
+.mission-header {
+	font-weight: bold;
+}
+
+.padding {
+	height: 10rem;
+}
+
 @media only screen and (min-width : 600px) {
+	html {
+		font-size: 20px;
+	}
+
 	.bigger-font {
-		font-size: 2vw;
+		font-size: 25px;
 	}
 	.details-body {
 		padding: 0 10% 0 10%;
@@ -200,7 +240,7 @@ iframe[seamless] {
 	.deal-detail-summary {
 		display: grid;
 		grid-template-columns: 50% 50%;
-		grid-template-rows: 40% 20% 40%;
+		grid-template-rows: 50% 20% 30%;
 	}
 	.deal-banner {
 		grid-row: 1 / 4;
@@ -209,12 +249,12 @@ iframe[seamless] {
 		object-position: center;
 		height: 100%;
 		width: 100%;
-		border-radius: 1vw 1vw 1vw 1vw;
+		border-radius: 8px 8px 8px 8px;
 	}
 	.deal-header {
 		grid-row: 1;
 		grid-column: 2;
-		padding: 5% 5% 0 5%;
+		padding: 1% 0% 0 0%;
 	}
 	.deal-product-name {
 		font-size: 2rem;
@@ -223,13 +263,10 @@ iframe[seamless] {
 	.deal-price {
 		grid-row: 2;
 		grid-column: 2;
-		padding: 5% 5% 0 5%;
-		padding: 0 5% 0 5%;
+		padding-left: 1%;
 		font-size: 1.5rem;
 	}
-	.retail-price {
-		text-decoration: line-through;
-	}
+
 	.deal-discount {
 		grid-row: 3;
 		grid-column: 2;
@@ -242,5 +279,23 @@ iframe[seamless] {
 		flex-direction: row;
 		justify-content: space-around;
 		font-size: 1.5rem;
+	}
+
+	.join-button {
+		font-size: 20px;
+		border-radius : 10px;
+		height : 30px;
+	}
+
+	.unite-button-clear {
+		color: var(--highlight-color);
+		font-size: 20px;
+		background-color: white;
+		border: 1px solid var(--highlight-color);
+		border-radius: 4px;
+		padding: 1px;
+		width: 80%;
+		max-width: 200px;
+		height: 30px;
 	}
 }

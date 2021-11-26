@@ -1,5 +1,5 @@
 <div>
-	<main>
+	<main class="bigger-font">
 		<section *ngIf="order.orderType == 'wholesale'" class="purchase-type">
 			<label for="wholesale">
 				<input type="radio" name="quantity" id="wholesale" (change)="selectOption('wholesale')">
@@ -11,7 +11,7 @@
 			</label>
 		</section>
 
-		<h2 *ngIf="order.orderType == 'retail' && !newTeam">Place your order to join Team {{team.creator}}</h2>
+		<h2 *ngIf="order.orderType == 'retail' && !newTeam">Place your order to join {{team.creator}}'s Team</h2>
 
 		<h2 *ngIf="order.orderType == 'retail' && newTeam">Place your order to create a new team</h2>
 
@@ -38,7 +38,7 @@
 			<button *ngIf="order.orderType == 'wholesale'" type="button" class="unite-button big-button wholesale-button" (click)="finalizePurchase()">Buy Now</button>
 			<!-- this flow is wrong for an invited user. An invited user should not have the option of choosing a team-->
 			<button *ngIf="order.orderType == 'retail' && newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy and Invite Friends (New Team)</button>
-			<button *ngIf="order.orderType == 'retail' &&!newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy & Join Team {{team.creator}}</button>
+			<button *ngIf="order.orderType == 'retail' &&!newTeam" type="button" class="unite-button big-button retail-button" (click)="gotoInbox()">Buy & Join {{team.creator}}'s Team</button>
 		</section>
 	</main>
 </div>

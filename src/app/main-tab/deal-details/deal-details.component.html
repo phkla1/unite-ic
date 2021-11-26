@@ -7,27 +7,28 @@
 				&#160;&#160;
 				<span class="deal-locality">{{deal.sellerLocality}}</span>	
 			</section>
-			<section class="deal-price">{{deal.unitPrice | currency : 'N'}} per {{deal.unit}}</section>
-			<section class="deal-discount">
-				<span class="retail-price">{{deal.retailPrice| currency : 'N'}}</span>
+			<section class="deal-price">
+				<span class="retail-price">{{deal.retailPrice| currency : 'N'}}</span> {{deal.unitPrice | currency : 'N'}} per {{deal.unit}}</section>
+				<span class="deal-discount-percentage"><mark>{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper </mark></span>
+			<!-- <section class="deal-discount">
+				
 				&#160;&#160;  {{deal.unitPrice| currency : 'N'}}
-				<span class="deal-discount-percentage">{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</span>
-			</section>
+
+			</section> -->
 		</section>
 
 		<section class="deal-detail-description-team">
 			<section class="goal-summary">
-				<span class="mission-header">YOUR MISSION:</span>
 				<span class="mission-text">
-					SECURE THIS PRICE by Unite-ing with others to buy a total of {{deal.dealTargetUnits}} {{deal.unit}}(s) before {{deal.deadline | date : 'fullDate' }}. 
+					UNITE with friends to buy a total of {{deal.dealTargetUnits}} {{deal.unit}}(s) before {{deal.deadline | date : 'fullDate' }}. 
 				</span>
 			</section>
 			<section class="deal-detail-countdown">
-				<section class="time-summary"> &#10163; {{ numOfTeams==0 ? "***" : numOfTeams }}  teams working on this goal</section>
+				<section class="time-summary"> &#10163; {{ numOfTeams$ | async}}  active teams</section>
 				<section class="time-left">{{daysLeft(deal.deadline) | number : '1.0-0' }} days Left!</section>
 			</section>
 			<article class="deal-detail-description">
-				<h1>Description</h1>
+				<h2>Description</h2>
 				<section class="basic-description">
 					Organic, freshly-picked Jos tomatoes. Farm to table. Tomatoes are low in calories, high in fiber, and are a good source of vitamin A, C, and B2. 
 				</section>
@@ -37,24 +38,24 @@
 			</article>
 
 			<section style="width: 100%;">
-				<h1>Teams to Join</h1>
+				<h2>Teams to Join</h2>
 				<div *ngFor="let team of teams$ | async" class="team-status">
 					<img class="profile-icon" src="../../../assets/unite-logo-2.svg">
 					<div class="team-status-description">
 						<div class="team-status-description-name">
-							Team {{team.creator}}
+							{{team.creator}}'s Team
 						</div>
 						<progress class="team-status-description-progress" max="10" value="5"></progress>
 						<div class="team-status-description-actions">
-							&#10163; Paid for {{ numOfTeamUnits[team.teamId] }} {{deal.unit}}(s)	
+							&#10163;{{ numOfTeamUnits[team.teamId] }} {{deal.unit}}(s)	
 						</div>
 					</div>
 					<div class="team-status-actions">
 						<div class="team-status-actions-button">
-							<button class="unite-button small-button" type="button" (click)="checkout(team.teamId)">Join Team</button>
+							<button class="unite-button join-button" type="button" (click)="checkout(team)">Join Team</button>
 						</div>
 						<div class="team-status-actions-remainder"> 
-							<!-- {{balanceLeft$(team.teamId) | async}}  -->
+							{{deal.dealTargetUnits - numOfTeamUnits[team.teamId]}} 
 							{{deal.unit}}(s) left</div>
 
 					</div>
@@ -79,6 +80,7 @@
 			</div>
 		</div>
 	</section>
+	<div class="padding"></div>
 
 	<footer class="floating-bottom-section">
 		<button class="unite-button-clear" type="button" (click)="checkout(false)">Buy Now (Escrow Protected)</button>	

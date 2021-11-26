@@ -1,37 +1,26 @@
-<!-- <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unite!</title>
-    <base href="/">
-</head> -->
-<body class="login-page">
-		<section class="row banner">
-			<img src="../assets/unite-logo-2.svg"> 
-			<!-- developing on localhost: for whatever reason unless we load images on this login/landing page they will not show up on any other page...so we need to "preload" here-->
-			<div style="display: none;">
-				<img src="../assets/ios-contact.svg"> 	
-				<img src="../assets/apples-summary.png">
-				<img src="../assets/beef-summary.png">
-				<img src="../assets/corn-summary.png">
-				<img src="../assets/tomato-summary.png">
-			</div>
-		</section>	
-	
-		<section class="row internet-identity">
-			<button id="iiLogin" class="login-button" type="button" (click)="iiLogin()" [disabled]="loginInProgress">Login With Face, Touch, etc.</button>
-		</section>
-	
-		<section class="row middle-text"> OR </section>
-	
-		<section class="row traditional-login">
-			<input type="text" placeholder="Your phone number" [(ngModel)]="phone"/>
-			<br>
-			<input type="password" placeholder="Your 6-digit passcode" [(ngModel)]="password"/>
-			<br>
-			<button (click)="loginByName()" class="login-button" type="submit">LOGIN</button>
-		</section>
-	
-		<section class="row register" id="console"></section>
-</body>
-<!-- </html> -->
+<main class="login-page">
+	<section class="row banner">
+		<img src="../assets/unite-logo-2.svg"> 
+		<!-- developing on localhost: for whatever reason unless we load images on this login/landing page they will not show up on any other page...so we need to "preload" here-->
+		<div style="display: none;">
+			<img src="../assets/ios-contact.svg"> 	
+		</div>
+	</section>	
+
+	<section class="row internet-identity">
+		<button id="iiLogin" class="login-button" type="button" (click)="iiLogin('iiLogin')" [disabled]="loginInProgress">Login With Face, Touch, Security Key</button>
+	</section>
+
+	<section class="row middle-text"> OR </section>
+
+	<section class="row traditional-login">
+		<input type="text" placeholder="Your phone number" [(ngModel)]="phone"/>
+		<br>
+		<input type="password" placeholder="Your 6-digit passcode" [(ngModel)]="password"/>
+	</section>
+	<section class="row traditional-login-button">
+		<button id='trad-login' (click)="loginByName('trad-login')" class="login-button" type="submit" [disabled]="loginInProgress">LOGIN</button>
+	</section>
+
+	<section class="row register" id="console"></section>
+</main>

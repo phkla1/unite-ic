@@ -31,8 +31,16 @@ export interface Order {
 	units : number,
 	orderType : string
 };
+
 export interface Team {
 	teamId : number,
 	creator : string,
 	orders : number[]
 };
+
+export interface ChatMessage {
+	from : string,
+	toGroup	: number,
+	body : number,
+	timestamp : number
+}

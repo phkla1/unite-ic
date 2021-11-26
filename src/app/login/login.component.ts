@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { EMPTY, from, of, Subscription } from "rxjs";
-import {map, switchMap} from 'rxjs/operators'; 
+import { EMPTY, from, Subscription } from "rxjs";
+import {switchMap} from 'rxjs/operators'; 
 import { UniteICService } from "../services/unite-ic.service";
 import {UserRecord} from '../services/interfaces'; 
 
@@ -25,14 +25,33 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() : void {}
 
-	//authclient login gives a success message once the II login page opens, so we need loginSub to tell us when the login is actually successful
-	async iiLogin() {
-		this.loginInProgress = true;
-        let button = document.getElementById('iiLogin') as HTMLButtonElement;
+	showButtonProgress(button : HTMLButtonElement) {
         button.innerHTML = `&#x263A`;
         button.classList.add('spin-button');
 		button.disabled = true;
+	}
 
+	removeButtonProgress(id) {
+		this.loginInProgress = false;
+		let button = document.getElementById(id) as HTMLButtonElement;
+		switch (id) {
+			case 'iiLogin':
+        		button.innerHTML = `Login With Face, Touch, Security Key`;
+				break;
+			case 'trad-login':
+        		button.innerHTML = `LOGIN`;
+				break;	
+			default:
+				break;
+		}
+        button.classList.remove('spin-button');
+	}
+
+	//authclient login gives a success message once the II login page opens, so we need loginSub to tell us when the login is actually successful
+	async iiLogin(id) {
+		this.loginInProgress = true;
+        let button = document.getElementById(id) as HTMLButtonElement;
+		this.showButtonProgress(button);
 		let response = await this.uniteConnector.iilogin();
 		this.loginSub = this.uniteConnector.loginSubject
 		.pipe(
@@ -69,7 +88,11 @@ export class LoginComponent implements OnInit {
 		)
 	}
 
-	loginByName() {
+	loginByName(id) {
+		this.loginInProgress = true;
+        let button = document.getElementById(id) as HTMLButtonElement;
+		this.showButtonProgress(button);
+
 		if(this.phone && this.password) {
 			this.uniteConnector.phoneLogin(this.phone).then(
 				value => {

@@ -45,7 +45,7 @@ actor {
 	var dealDatabase : [Deal] = [
 	{
 		dealId = 1;
-		dealBanner = "../assets/tomato-summary.png";
+		dealBanner = "https://res.cloudinary.com/unitebeta/image/upload/v1637834522/tomato-summary_e9g02i.png";
 		productName = "Big, Juicy Jos Tomatoes";
 		productDescription= "Organic, freshly-picked Jos tomatoes. Farm to table. Tomatoes are low in calories, high in fiber, and are a good source of vitamin A, C, and B2.";
 		dealDescription = "Minimum order 1 paint. Each paint contains 10-12 fresh tomatoes depending on size & harvest.";
@@ -60,7 +60,7 @@ actor {
 	},
 	{
 		dealId = 2;
-		dealBanner = "../assets/apples-summary.png"; 
+		dealBanner = "https://res.cloudinary.com/unitebeta/image/upload/v1637834522/apples-summary_pnojvz.png"; 
 		productName = "Fresh Organic Red Apples";
 		productDescription= "Benin red apples. Grown with only organic and natural fertilizers.";
 		dealDescription = "Minimum order 1 pack. Each pack contains 10 apples";
@@ -75,7 +75,7 @@ actor {
 	},	
 	{
 		dealId = 3;
-		dealBanner = "../assets/beef-summary.png"; 
+		dealBanner = "https://res.cloudinary.com/unitebeta/image/upload/v1637834523/beef-summary_zpmxjr.png"; 
 		productName = "High Quality Beef";
 		productDescription= "Organic longhorn cattle. Freshly slaughtered.";
 		dealDescription = "Minimum order 10KG";
@@ -90,7 +90,7 @@ actor {
 	},
 	{
 		dealId = 4;
-		dealBanner = "../assets/corn-summary.png";
+		dealBanner = "https://res.cloudinary.com/unitebeta/image/upload/v1637834523/corn-summary_swp7pm.png";
 		productName = "Fresh Soft Corn";
 		productDescription= "Freshly harvested corn from our farm in Epe";
 		dealDescription = "Minimum order 20 Ears";
@@ -262,7 +262,6 @@ actor {
 
 	func isRegistered(userId : UserId) : Bool {
 		func userExists(user: UserRecord): Bool { user.callerId == userId };
-    
     	switch (Array.find<UserRecord>(userDatabase, userExists)) {
         	case (null) { false };
         	case (_) { true };

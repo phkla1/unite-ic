@@ -1,6 +1,6 @@
 .deals-container {
 	display: grid;
-	grid-template-columns: repeat(2, 48%);
+	grid-template-columns: 96%;
 	gap: 4vw 4vw;
 	grid-auto-flow: row;
 	margin: 3vw 6vw 3vw 6vw;
@@ -11,10 +11,10 @@
 .deal-summary {
 	background: rgba(255, 192, 203, 0.1);
 	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
-	border-radius: 1vw;
+	border-radius: 2vw;
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 40% 15% 10% 12.5% 10% 12.5%;
+	grid-template-rows: 40vh 8vh 6vh 5vh 8vh 5vh;
 }
 .deal-banner {
 	grid-row: 1;
@@ -27,16 +27,16 @@
 
 .deal-product-name {
 	grid-row: 2;
-	font-size: 1.5rem;
+	font-size: 3rem;
 	font-weight: bolder;
-	padding: 5% 5% 0 5%;
+	padding: 2% 0%;
 	max-height: 2rem;
 }
 .deal-locality {
 	grid-row: 3;
 	font-weight: lighter;
 	font-style: italic;
-	padding: 0 5% 0 5%;
+	font-size : 2.5rem;
 }
 
 .deal-quantity-price {
@@ -45,23 +45,14 @@
 }
 .deal-text-highlight {
 	color : var(--highlight-color);
-	font-size: 1.5rem;
+	font-size: 2.5rem;
 	font-weight: bolder;
 }
-/*
-.deal-quantity {
-	font-size: 1rem;
-	font-style: italic;
-	font-weight: lighter;
-}
-*/
 
 .deal-discount {
 	grid-row: 5;
 	padding: 0% 5% 0% 5%;
-	display: flex;
-	justify-content: space-between;
-	font-size: 1.2rem;
+	font-size: 2rem;
 }
 .retail-price {
 	text-decoration: line-through;
@@ -85,7 +76,7 @@
 	vertical-align: middle;
 	color: red;
 	font-weight: bold;
-	font-size : 1.5rem;
+	font-size : 2.5rem;
 }
 
 .deal-inventory {
@@ -93,4 +84,46 @@
 	padding: 0 5% 0 5%;
 	font-size: 1.2rem;
 	color: #787878;
+}
+
+@media only screen and (min-width: 600px) {
+	html {
+		font-size: 20px;
+	}	
+
+	body {
+		font-size: 20px
+	}
+
+	main {
+		font-size: 20px;
+	}
+
+	.deals-container {
+		display: grid;
+		grid-template-columns: repeat(2, 300px);
+		gap: 4vw 4vw;
+		grid-auto-flow: row;
+		margin: 3vw 6vw 3vw 6vw;
+		max-width: 700px;
+		max-height: 700px;
+	}
+
+	.deal-summary {
+		background: rgba(255, 192, 203, 0.1);
+		box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+		border-radius: 8px;
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: 40% 15% 10% 12.5% 10% 12.5%;
+	}
+	.deal-banner {
+		grid-row: 1;
+		object-fit: cover;
+		object-position: center;
+		height: 100%;
+		width: 100%;
+		border-radius: 8px 8px 0 0;
+	}
+
 }

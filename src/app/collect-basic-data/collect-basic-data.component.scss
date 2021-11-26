@@ -34,3 +34,24 @@
 input {
 	padding-left: 10%;
 }
+
+@media only screen and (max-width: 599px) {
+	body {
+		font-size: 3.5rem;
+	}
+
+	.data-page {
+		display: grid;
+		grid-template-rows: repeat(5, 16vh);
+		grid-template-columns: 1fr;
+	}	
+
+	input {
+		height: 8rem;
+	}
+
+	input::placeholder {
+		font-size : 4rem;
+		font-style: italic;
+	}
+}
