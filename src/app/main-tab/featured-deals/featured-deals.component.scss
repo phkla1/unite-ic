@@ -1,3 +1,6 @@
+h1 {
+	font-size: 20px;
+}
 .deals-container {
 	display: grid;
 	grid-template-columns: 96%;
@@ -14,7 +17,7 @@
 	border-radius: 2vw;
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 40vh 8vh 6vh 5vh 8vh 5vh;
+	grid-template-rows: 40vh 8vh 4vh 5vh 8vh 5vh;
 }
 .deal-banner {
 	grid-row: 1;
@@ -27,9 +30,9 @@
 
 .deal-product-name {
 	grid-row: 2;
-	font-size: 3rem;
+	font-size: 4rem;
 	font-weight: bolder;
-	padding: 2% 0%;
+	padding: 2% 0% 0% 1%;
 	max-height: 2rem;
 }
 .deal-locality {
@@ -37,22 +40,23 @@
 	font-weight: lighter;
 	font-style: italic;
 	font-size : 2.5rem;
+	padding-left: 1%;
 }
 
 .deal-quantity-price {
 	grid-row: 4;
-	padding: 0 5% 0 5%;
+	padding-left: 1%;
 }
 .deal-text-highlight {
 	color : var(--highlight-color);
-	font-size: 2.5rem;
+	font-size: 3rem;
 	font-weight: bolder;
 }
 
 .deal-discount {
 	grid-row: 5;
-	padding: 0% 5% 0% 5%;
-	font-size: 2rem;
+	padding-left: 1%;
+	font-size: 3rem;
 }
 .retail-price {
 	text-decoration: line-through;
@@ -70,13 +74,14 @@
 }
 .time-icon {
 	vertical-align: middle;
+	font-size : 3rem;
 }
 .time-left {
 	padding-left: 10%;
 	vertical-align: middle;
 	color: red;
 	font-weight: bold;
-	font-size : 2.5rem;
+	font-size : 3.5rem;
 }
 
 .deal-inventory {
@@ -86,13 +91,17 @@
 	color: #787878;
 }
 
-@media only screen and (min-width: 600px) {
-	html {
-		font-size: 20px;
-	}	
+.goal-summary {
+	padding-left : 1%;
+}
 
-	body {
-		font-size: 20px
+.deal-detail-countdown {
+	padding-left : 1%;
+}
+
+@media only screen and (min-width: 600px) {
+	h1 {
+		font-size: 30px;
 	}
 
 	main {
@@ -115,8 +124,17 @@
 		border-radius: 8px;
 		display: grid;
 		grid-template-columns: 100%;
-		grid-template-rows: 40% 15% 10% 12.5% 10% 12.5%;
+		grid-template-rows: 240px 80px 40px 60px 60px 50px;
 	}
+
+	.deal-product-name {
+		grid-row: 2;
+		font-size: 30px;
+		font-weight: bolder;
+		padding-left: 1%;
+		max-height: 35px;
+	}
+
 	.deal-banner {
 		grid-row: 1;
 		object-fit: cover;
@@ -126,4 +144,29 @@
 		border-radius: 8px 8px 0 0;
 	}
 
+	.deal-text-highlight {
+		color : var(--highlight-color);
+		font-size: 25px; 
+		font-weight: bolder;
+	}
+
+	.deal-locality {
+		grid-row: 3;
+		font-weight: lighter;
+		font-style: italic;
+		font-size : 20px;
+		padding-left: 1%;
+	}
+
+	.retail-price {
+		text-decoration: line-through;
+		color: #787878;
+		font-size: 25px;
+	}
+
+	.deal-discount {
+		grid-row: 5;
+		padding-left: 1%;
+		font-size: 25px;
+	}
 }

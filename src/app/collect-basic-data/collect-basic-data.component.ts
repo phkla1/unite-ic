@@ -17,6 +17,7 @@ export class CollectBasicDataComponent implements OnInit {
 	showSurname = 'visible';
 	showPhone = 'visible';
 	record : UserRecord;
+	inProgress : boolean;
 
 	constructor(private activatedRoute : ActivatedRoute, private router : Router, private icConnector: UniteICService, private uniteConnector: UniteHttpService ) { }
 
@@ -38,12 +39,15 @@ export class CollectBasicDataComponent implements OnInit {
 	}
 
 	completeRegistration(firstname, surname, phone) {
+		this.inProgress = true;
+        let button = document.getElementById('register') as HTMLButtonElement;
+		this.showButtonProgress(button);
 		if(firstname && surname && phone) {
 			from(this.icConnector.updateRecord(firstname, surname, phone))
 			.subscribe(
 				data => {
-//					console.log("DATA FROM IC:", data);
 					if(data) {
+						this.icConnector.name = firstname;
 						//inform Unite server about new registration, then goto inbox
 						this.uniteConnector.icRegister(this.record.callerId)
 						.subscribe();
@@ -58,8 +62,23 @@ export class CollectBasicDataComponent implements OnInit {
 				}
 			);
 		}
-		//send the relevant fields to the backend, and then navigate to inbox 
+		else {
+			this.removeButtonProgress('register');
+		}
 
+	}
+
+	showButtonProgress(button : HTMLButtonElement) {
+        button.innerHTML = `&#x263A`;
+        button.classList.add('spin-button');
+		button.disabled = true;
+	}
+
+	removeButtonProgress(id) {
+		this.inProgress = false;
+		let button = document.getElementById(id) as HTMLButtonElement;
+   		button.innerHTML = `Complete My Registration`;
+        button.classList.remove('spin-button');
 	}
 
 }

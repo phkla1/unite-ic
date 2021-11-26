@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 	phone : string;
 	password : string;
 
-	constructor(private uniteConnector: UniteICService, private router:Router) {
+	constructor(private icConnector: UniteICService, private router:Router) {
 		this.profile = new Object as UserRecord;
 	}
 
@@ -52,13 +52,13 @@ export class LoginComponent implements OnInit {
 		this.loginInProgress = true;
         let button = document.getElementById(id) as HTMLButtonElement;
 		this.showButtonProgress(button);
-		let response = await this.uniteConnector.iilogin();
-		this.loginSub = this.uniteConnector.loginSubject
+		let response = await this.icConnector.iilogin();
+		this.loginSub = this.icConnector.loginSubject
 		.pipe(
 			switchMap(data => {
 				if(data) {
 					//get user record
-					return from(this.uniteConnector.checkRegistration());
+					return from(this.icConnector.checkRegistration());
 				}
 				else {
 					return EMPTY;
@@ -71,12 +71,9 @@ export class LoginComponent implements OnInit {
 					this.router.navigateByUrl('/collectData', {state : data});
 				}
 				else {
+					this.icConnector.name = data.firstname;
 					this.router.navigateByUrl('/deals');
 				}
-				/*
-				let console = document.getElementById('console');
-				console.innerText = data.callerId + data.counter + data.firstname + data.surname + data.phone + data.timestamp 
-				*/
 			},
 			err => {
 				this.loginInProgress = false;
@@ -94,10 +91,10 @@ export class LoginComponent implements OnInit {
 		this.showButtonProgress(button);
 
 		if(this.phone && this.password) {
-			this.uniteConnector.phoneLogin(this.phone).then(
+			this.icConnector.phoneLogin(this.phone).then(
 				value => {
 					if(value.firstname) {
-						this.uniteConnector.name = value.firstname;
+						this.icConnector.name = value.firstname;
 						this.router.navigateByUrl('/deals');
 					}
 					else {
@@ -112,7 +109,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	async logout() {
-		this.uniteConnector.logout();
+		this.icConnector.logout();
 		document.getElementById('greeting').innerText = '';
 		this.loginSub.unsubscribe();
 	}

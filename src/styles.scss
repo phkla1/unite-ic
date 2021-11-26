@@ -68,7 +68,7 @@ button {
 .unite-button {
 	color: white;
 	background-color: var(--highlight-color);
-	border-radius: 0.5rem;
+	border-radius: 1rem;
 	border: 0px;
 	padding: 0.1rem;
 	width: 80%;
@@ -98,32 +98,3 @@ input {
 h1 {
 	margin: 3vw 6vw 3vw 6vw;
 }
-
-
-
-/* styles for tablets */
-@media only screen and (min-width: 479px) {
-	button {
-		width: 41.666666666vw;
-	}
-
-	input {
-		width: 41.666666666vw;
-	}
-
-	html {
-		font-size: 2vw;
-	}	
-}
-
-/*styles for desktops */
-@media only screen and (min-width: 991px) {
-	button {
-		width: 20.83333333vw;
-	}	
-
-	input {
-		width: 20.83333333vw;
-	}
-}
-

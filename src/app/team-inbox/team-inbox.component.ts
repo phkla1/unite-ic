@@ -16,14 +16,7 @@ export class TeamInboxComponent implements OnInit {
 	messages$: Subject<ChatMessage>;
 	canvas: HTMLCanvasElement;
 	confettiCanvas;
-	/*
-	messages = [
-		{messageId: 1, from : 'me', message : "the first message from me", timestamp : 10, replyTo : ''},
-		{messageId : 2, from : 'them', message : "the first message from them", timestamp : 10, replyTo : ''},
-		{messageId : 3, from : 'them', message : "the first reply message from them", timestamp : 10, replyTo : 1},
-		{messageId : 4, from : 'me', message : "the first reply message from me", timestamp : 10, replyTo : 3},
-	];
-	*/
+	confetti;
 
 	constructor(private activatedRoute: ActivatedRoute, private router: Router, private icService: UniteICService, private renderer: Renderer2, private elementRef: ElementRef) { }
 
@@ -32,6 +25,7 @@ export class TeamInboxComponent implements OnInit {
 			params => {
 				this.team = window.history.state;
 				//				this.showOldMessages();
+				this.setupCanvas();
 				this.generateWelcomeMessage();
 			},
 			err => { },
@@ -39,59 +33,89 @@ export class TeamInboxComponent implements OnInit {
 		);
 	}
 
-	/*
-	showOldMessages() {
-		let sortedMessages = this.messages.sort((first, second) =>  first.messageId - second.messageId);
-		let container = Array.from(document.getElementsByClassName('messages'))[0] as HTMLElement;
-
-		sortedMessages.forEach((message, ind) => {
-			//add styles depending on whether it's buyer or seller 
-			let elem = document.createElement('div');
-			elem.id = ind.toString(); 
-			elem.appendChild(document.createTextNode(message.message));
-			container.appendChild(elem);	
-			let newElem = document.getElementById(ind.toString());
-			//classlist.add isn't working, hence this other approach
-			message.from == 'me' ? this.addClass(newElem, 'buyer-chat'): this.addClass(newElem, 'seller-chat');
-		});
-		this.gotoDeliveryPage().subscribe();
-	}
-	*/
-
-
 	adjustHeight() {
 		//will use this to automatically adjust height of textarea based on text entered
 	}
 
+	setupCanvas() {
+		var myCanvas = document.createElement('canvas');
+		myCanvas.id = 'canvas';
+		let container = document.getElementById('messages');
+		container.appendChild(myCanvas);
+
+		this.confetti = confettiLib.create(myCanvas, {
+			resize: true,
+		});
+		this.confetti({
+			particleCount: 100,
+			spread: 160
+		});
+	}
+
+	generateMessage(type = 'normal', sender = 'buyer', message = '') {
+		let id = Math.floor(Math.random() * 100000).toString();	
+		let classes = [], msg;
+		let container = document.getElementById('messages');
+		switch (type) {
+			case 'normal':
+				classes = ['chat-box', sender == 'buyer' ? 'buyer-chat' : 'seller-chat'];
+				msg = (document.getElementById('sendMessage') as HTMLInputElement).value; 
+				break;
+			case 'welcome':
+				classes = ['chat-box', 'welcome-chat'];
+				msg = this.icService.name + ' has just joined the team! Send a welcome message!'; 
+				break;
+			default:
+				break;
+		}
+		if(sender === 'seller') msg = message;
+		let elem = document.createElement('div');
+		elem.id = id;
+		elem.appendChild(document.createTextNode(msg));
+		let canvas = document.getElementById('canvas');
+		canvas.before(elem);
+		let newElem = document.getElementById(id); 
+		classes.forEach(cls => this.addClass(newElem, cls));
+	}
+
+	sendMessage() {
+		this.generateMessage();
+		this.icService.sleep(2000).then(
+			ready => {
+				this.generateMessage('normal', 'seller', 'Your products have arrived!!!')
+				this.celebrate();
+		}).then(
+			ready => this.icService.sleep(3000)
+		).then(ready => this.router.navigateByUrl('/receiveItems'));
+	}
+
 	generateWelcomeMessage() {
 		//demo what happens when a user joins
-		let container = document.getElementById('messages');
-		let elem = document.createElement('div');
-		elem.id = 'welcome-message';
-		elem.appendChild(document.createTextNode(this.icService.name + ' has joined the team! Send them a welcome message!'))
-		container.appendChild(elem);
-		let welcome = document.getElementById('welcome-message');
-		this.addClass(welcome, 'chat-box');
-		this.addClass(welcome, 'welcome-chat');
+		this.generateMessage('welcome');
 		this.celebrate();
 	}
 
 	addClass(elem: HTMLElement, classname: string) {
 		let chatbox = document.createElement('style');
 		chatbox.type = 'text/css';
-		chatbox.innerHTML = '.chat-box {min-height: 3rem; width: 60%; background-color: whitesmoke; margin-top: 0.5rem; padding: 0 0.5rem 0 0.5rem; }';
+		chatbox.innerHTML = '.chat-box {min-height: 5rem; width: 60%; margin-top: 1rem; padding: 0 0.5rem 0 0.5rem; font-size : 3vh; }';
 
 		let buyerchat = document.createElement('style');
 		buyerchat.type = 'text/css';
-		buyerchat.innerHTML = '.buyer-chat {align-self: flex-start; border-radius: 0.5rem 0.2rem 0.2rem 0; background-color: mintcream;}';
+		buyerchat.innerHTML = '.buyer-chat {align-self: flex-start; border-radius: 2rem 1rem 1rem 0; background-color: mintcream;}';
 
 		let sellerchat = document.createElement('style');
 		sellerchat.type = 'text/css';
-		sellerchat.innerHTML = '.seller-chat {align-self: flex-end; border-radius: 0.2rem 1rem 0 0.2rem; background-color: greenyellow; }';
+		sellerchat.innerHTML = '.seller-chat {align-self: flex-end; border-radius: 1rem 2rem 0 1rem; background-color: greenyellow; }';
+
+		let welcomechat = document.createElement('style');
+		welcomechat.type = 'text/css';
+		welcomechat.innerHTML = '.welcome-chat { align-self: center;	border-radius: 1rem; background-color: yellow; border: 4px solid rgba(152, 193, 81, 0.4); text-align: center; width: 85%; margin : 3px;}';
 
 		document.getElementsByTagName('head')[0].appendChild(chatbox);
 		document.getElementsByTagName('head')[0].appendChild(buyerchat);
 		document.getElementsByTagName('head')[0].appendChild(sellerchat);
+		document.getElementsByTagName('head')[0].appendChild(welcomechat);
 		switch (classname) {
 			case 'buyer-chat':
 				elem.className = 'chat-box buyer-chat';
@@ -99,28 +123,16 @@ export class TeamInboxComponent implements OnInit {
 			case 'seller-chat':
 				elem.className = 'chat-box seller-chat';
 				break;
+			case 'welcome-chat':
+				elem.className = 'chat-box welcome-chat';
+				break;
 			default:
 				break;
 		}
 	}
 
 	celebrate() {
-		var myCanvas = document.createElement('canvas');
-		let container = document.getElementById('messages');
-		container.appendChild(myCanvas);
-
-		var myConfetti = confettiLib.create(myCanvas, {
-			resize: true,
-		});
-		myConfetti({
-			particleCount: 100,
-			spread: 160
-		});
-		myConfetti();
-	}
-
-	sendMessage() {
-		let message = (document.getElementById('sendMessage') as HTMLInputElement).value;
+		this.confetti();
 	}
 
 	showLoader() { }

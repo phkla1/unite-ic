@@ -2,7 +2,7 @@ h2 {
 	margin-left: 0%;
 }
 .bigger-font {
-	font-size: 5vh;
+	font-size: 3vh;
 }
 
 .details-body {
@@ -25,21 +25,23 @@ h2 {
 }
 .deal-header {
 	grid-row: 2;
-	padding: 5% 5% 0 5%;
+	padding-left: 1%;
+	padding-top: 1%;
 }
 .deal-product-name {
-	font-size: 4rem;
+	font-size: 5rem;
 	font-weight: bolder;
 }
 .deal-locality {
 	font-weight: lighter;
 	font-style: italic;
+	padding-left: 1%;
 }
 
 .deal-detail-summary {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 55% 20% 15% ;
+	grid-template-rows: 55% 20% 15%;
 }
 .deal-banner {
 	grid-row: 1;
@@ -55,7 +57,7 @@ h2 {
 }
 
 .deal-detail-description-team {
-	padding: 1% 0% 0% 0%;
+	padding-left: 2%;
 	margin-bottom: 5%;
 	display: flex;
 	flex-direction: column;
@@ -100,6 +102,7 @@ h2 {
 
 .profile-icon {
 	grid-column: 1;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	border-radius: 30%;
@@ -150,13 +153,13 @@ h2 {
 
 .unite-button-clear {
 	color: var(--highlight-color);
-	font-size: 2.5rem;
+	font-size: 3rem;
 	background-color: white;
 	border: 0.2rem solid var(--highlight-color);
 	border-radius: 0.7rem;
 	padding: 0.1rem;
 	width: 80%;
-	height: 5rem;
+	height: 8rem;
 }
 
 .floating-bottom-section {
@@ -164,7 +167,7 @@ h2 {
 	width : 100%;
 	background-position: 0% 0%;
 	position: fixed;
-	bottom: 0%;
+	bottom: 3%;
 	left: 0%;
 	display: flex;
 	align-items: center;
@@ -203,10 +206,6 @@ iframe {
 }
 iframe[seamless] {
 	border: none;
-}
-
-.deal-discount-percentage {
-	padding-left: 1%;
 }
 
 mark {
@@ -295,7 +294,61 @@ mark {
 		border-radius: 4px;
 		padding: 1px;
 		width: 80%;
-		max-width: 200px;
+		max-width: 500px;
 		height: 30px;
 	}
+
+	.team-status {
+		width : 100%;
+		display : grid;
+		grid-template-columns: 15% 50% 35%;	
+		border-bottom: 1px solid lightgray;
+		margin: 1rem;
+	}
+
+	.profile-icon {
+		grid-column: 1;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 30%;
+		max-width: 100%;
+	}
+	.team-status-description {
+		grid-column: 2;
+		display: grid;
+		grid-template-rows: 40% 20% 40%;
+	}
+	.team-status-actions {
+		grid-column: 3;
+		display: grid;
+		grid-template-rows: 50% 50%;
+	}
+	
+	.team-status-description-name {
+		grid-row: 1;
+		text-align: center;
+	}
+	.team-status-description-progress {
+		grid-row: 2;
+		width: 100%;
+	}
+	.team-status-description-actions {
+		grid-row: 3;
+		text-align: center;
+	}
+	
+	.team-status-actions-button {
+		grid-row: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.team-status-actions-remainder {
+		grid-row: 2;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
 }

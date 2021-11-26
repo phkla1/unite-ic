@@ -1,13 +1,15 @@
 .main-body {
 	height: 100vh;
-	padding: 10vh;
+	padding: 5vh 5vh 0 5vh;
 	background-color: gainsboro;
-	font-size: 4vh;
+	font-size: 3vh;
 }
 
 .messages-container {
 	display: grid;
 	grid-template-rows: auto 70vh auto;
+	grid-template-columns: 100%;
+	background-color: whitesmoke;
 }
 
 header {
@@ -27,8 +29,7 @@ header {
 	align-items: center;
 }
 
-
-.messages {
+#messages {
 	grid-row: 2;
 	background-color: lightgrey;
 	padding: 2%;
@@ -44,9 +45,17 @@ footer {
 	grid-template-columns: 80% 20%;
 }
 
+
+textarea::placeholder {
+	font-size: 2vh;
+}
+
+textarea {
+	font-size: 2vh;
+}
+
 .chat-box {
 	min-height: 3rem;
-	width: 60%;
 	background-color: whitesmoke;
 	margin-top: 0.5rem;
 	padding: 0 0.5rem 0 0.5rem;
@@ -57,20 +66,23 @@ footer {
 	align-self: flex-start;
 	border-radius: 0.5rem 0.2rem 0.2rem 0;
 	background-color: mintcream;
+	width: 60%;
 }
 
 .seller-chat {
 	align-self: flex-end;
 	border-radius: 0.2rem 1rem 0 0.2rem;
 	background-color: greenyellow;
+	width: 60%;
 }
 
 .welcome-chat {
 	align-self: center;	
-	border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-	background-color: rgba(234, 221, 246, 0.5);
-	border: 2px solid plum;
+	border-radius: 1rem;
+	background-color:floralwhite;
+	border: 2px solid rgba(152, 193, 81, 0.4);
 	text-align: center;
+	width: 90%;
 }
 
 .footer-send-message {
@@ -80,7 +92,8 @@ footer {
 	border-radius: 10px;
 	padding: 1rem;
 	margin: 0;
-	font-size: 1rem;
+	font-size: 3rem;
+	height: 7rem;
 }
 
 .footer-send-button {
@@ -93,12 +106,12 @@ footer {
 .m_scroll_arrows
 {
 	display: block;
-	width: 0.7rem;
-	height: 0.7rem;
+	width: 3rem;
+	height: 3rem;
 	transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg); 
-	border-right: 0.3rem solid white;
-	border-bottom: 0.3rem solid white;
+	border-right: 0.9rem solid white;
+	border-bottom: 0.9rem solid white;
 	margin: 0.2rem 0.3rem 0 0;
 }
 

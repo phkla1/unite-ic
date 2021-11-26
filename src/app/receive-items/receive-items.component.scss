@@ -12,9 +12,13 @@
 }
 
 input {
-	height: 3rem;
-	width: 4rem;
+	height: 10rem;
+	width: 8rem;
 	text-align: center;
-	font-size: 2rem;
+	font-size: 4rem;
 	margin: 1px;
+}
+
+.bigger-font {
+	font-size: 3vh;
 }

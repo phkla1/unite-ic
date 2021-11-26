@@ -4,26 +4,29 @@
 	</header>
 	<h1>Featured Team Deals</h1>
 	<main class="deals-container">
-		<section *ngFor="let deal of dealSubject$ | async">
-			<div class="deal-summary" (click)="showDeal(deal.dealId)">
-				<img class="deal-banner" src="{{deal.dealBanner}}" alt="Image loading...pls wait">
-				<span class="deal-product-name">{{deal.productName}}</span>
-				<span class="deal-locality">{{deal.sellerLocality}}</span>	
-				<section class="deal-quantity-price">
-					<span class="deal-text-highlight">Only {{deal.unitPrice | currency : 'N'}} per {{deal.unit}} !!</span>
-				</section>
-
-				<section class="deal-discount">
-					<span class="retail-price">{{deal.retailPrice | currency : 'N'}}</span> 
-					&#160;&#160;  {{deal.unitPrice | currency : 'N'}}
-					<span class="deal-discount-percentage"><mark>{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</mark></span>
-				</section>
-
-				<section class="deal-countdown">
-					<section class="time-icon">&#8986;</section>
-					<section class="time-left">{{daysLeft(deal.deadline) | number : '1.0-0'}} days Left!</section>
-				</section>
-			</div>
-		</section>
+		<div *ngIf="(dealSubject$ | async)?.length > 0; else loading">
+			<section *ngFor="let deal of dealSubject$ | async">
+				<div class="deal-summary" (click)="showDeal(deal.dealId)">
+					<img class="deal-banner" src="{{deal.dealBanner}}" alt="Image loading...pls wait">
+					<span class="deal-product-name">{{deal.productName}}</span>
+					<span class="deal-locality">{{deal.sellerLocality}}</span>	
+					<section class="deal-quantity-price">
+						<span class="deal-text-highlight">Only {{deal.unitPrice | currency : 'N'}} per {{deal.unit}} !!</span>
+					</section>
+	
+					<section class="deal-discount">
+						<span class="retail-price">{{deal.retailPrice | currency : 'N'}}</span> 
+						&#160;&#160;  {{deal.unitPrice | currency : 'N'}}
+						<span class="deal-discount-percentage"><mark>{{ 1 - deal.unitPrice/deal.retailPrice | percent}} cheaper</mark></span>
+					</section>
+	
+					<section class="deal-countdown">
+						<section class="time-icon">&#8986;</section>
+						<section class="time-left">{{daysLeft(deal.deadline) | number : '1.0-0'}} days Left!</section>
+					</section>
+				</div>
+			</section>
+		</div>
+		<ng-template #loading>Loading deals from Internet Computer...</ng-template>
 	</main>
 </section>

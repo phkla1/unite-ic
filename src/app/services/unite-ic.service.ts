@@ -14,10 +14,10 @@ const createActor = require('src/declarations/unite').createActor;
 export class UniteICService {
 	authClient : AuthClient;
 	currentIdentity : Identity;
-//	DFX_NETWORK = "ic";
-	DFX_NETWORK = "null";
+	DFX_NETWORK = "ic";
+//	DFX_NETWORK = "null";
 	LOCAL_II_CANISTER = 'rwlgt-iiaaa-aaaaa-aaaaa-cai';
-	LOCAL_II_URL = "https://fdb9-197-211-58-122.ngrok.io" + "?canisterId=" + this.LOCAL_II_CANISTER;
+	LOCAL_II_URL = " https://707f-197-211-58-130.ngrok.io" + "?canisterId=" + this.LOCAL_II_CANISTER;
 	iiLoggedIn	= false;
 	public loginSubject : Subject<boolean>;
 	public name = '';

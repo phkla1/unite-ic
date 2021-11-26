@@ -81,6 +81,10 @@ export class DealDetailsComponent implements OnInit, OnDestroy {
 		return this.icService.daysLeft(datems);
 	}
 
+	stillLoading() : boolean {
+		return Object.keys(this.numOfTeamUnits).length == 0;
+	}
+
 	checkout(team) {
 		let state = {};
 		if(team && team.teamId) {

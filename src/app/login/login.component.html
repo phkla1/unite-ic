@@ -11,14 +11,14 @@
 		<button id="iiLogin" class="login-button" type="button" (click)="iiLogin('iiLogin')" [disabled]="loginInProgress">Login With Face, Touch, Security Key</button>
 	</section>
 
-	<section class="row middle-text"> OR </section>
+	<section class="row middle-text invisible"> OR </section>
 
-	<section class="row traditional-login">
+	<section class="row traditional-login invisible">
 		<input type="text" placeholder="Your phone number" [(ngModel)]="phone"/>
 		<br>
 		<input type="password" placeholder="Your 6-digit passcode" [(ngModel)]="password"/>
 	</section>
-	<section class="row traditional-login-button">
+	<section class="row traditional-login-button invisible">
 		<button id='trad-login' (click)="loginByName('trad-login')" class="login-button" type="submit" [disabled]="loginInProgress">LOGIN</button>
 	</section>
 

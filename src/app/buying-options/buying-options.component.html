@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><input id="units" type="number" max="{{getMaxOfType()}}" min="1" (click)="updateUnits()"></td>
+						<td><input id="units" type="number" max="{{getMaxOfType()}}" min="1" (click)="updateUnits()"  (change)="updateUnits()" (input)="updateUnits()"></td>
 						<td>{{curUnits}}</td>
 						<td>{{curUnits * deal.unitPrice}}</td>
 					</tr>
