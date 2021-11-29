@@ -46,6 +46,13 @@ input {
 	text-align: center;
 }
 
+.bigger-button {
+	font-size: 3rem;
+	min-height: 6rem;
+	margin: 1rem;
+	border-radius : 1rem;
+}
+
 @keyframes rotating {
     from {
       transform: rotate(0deg);

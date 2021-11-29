@@ -26,12 +26,12 @@ export class DealDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this.numOfTeams$.next('***');
+//		this.numOfTeams$.next('***');
 		let sub = this.activatedRoute.paramMap.subscribe(
 			() => {
-				this.numOfTeams$.next('***');
+//				this.numOfTeams$.next('***');
 				this.deal = window.history.state;
-				this.numOfTeams$.next('***loading***');
+//				this.numOfTeams$.next('***loading***');
 				//process data that depends on teams...
 				this.icService.getTeams(this.deal.dealId).then(
 				(teams:Team[]) => {

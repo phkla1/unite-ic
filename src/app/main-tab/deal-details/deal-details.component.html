@@ -19,14 +19,15 @@
 		<section class="deal-detail-description-team">
 			<section class="goal-summary">
 				<span class="mission-text">
-					UNITE with friends to buy a total of {{deal.dealTargetUnits}} {{deal.unit}}(s) before {{deal.deadline | date : 'fullDate' }}. 
+					UNITE with friends to buy a total of {{deal.dealTargetUnits}} {{deal.unit}}(s) before {{deal.deadline | date : 'fullDate' }}. Join a team, create a new team, or buy wholesale. 
 				</span>
 			</section>
 			<section class="deal-detail-countdown">
-				<section class="time-summary"> &#10163; 
-					{{ numOfTeams$ | async}}  active teams
+				<section class="time-summary"> 
+					<span *ngIf="numOfTeams$ | async as numOfTeams; else loading">&#10163; {{numOfTeams}} team(s) active</span>
+					<ng-template #loading>Loading active teams</ng-template>
 				</section>
-				<section class="time-left">{{daysLeft(deal.deadline) | number : '1.0-0' }} days Left!</section>
+				<section class="time-left"> Days Left : {{daysLeft(deal.deadline) | number : '1.0-0' }} </section>
 			</section>
 			<article class="deal-detail-description">
 				<h2>Description</h2>

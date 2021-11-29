@@ -93,11 +93,4 @@ export class InboxComponent implements OnInit {
 			}
 		);
 	}
-
-	/*
-	openConversation(userId) {
-		console.log("OPENING CHAT BOX")
-		this.router.navigate(['conversation'], {state : {userId : userId} });
-	}
-	*/
 }
