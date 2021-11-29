@@ -14,7 +14,7 @@
 .login-page {
 	display: grid;
 	grid-template-rows: repeat(8, 12.5vh);
-	grid-template-columns: repeat(12, 1fr);
+	grid-template-columns: repeat(12, 8.3333333vw);
 	margin: 5%;
 	max-width: 700px;
 	text-align: center;

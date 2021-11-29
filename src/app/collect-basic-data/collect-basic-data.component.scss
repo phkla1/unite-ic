@@ -36,6 +36,25 @@ input {
 	padding-left: 10%;
 }
 
+.spin-button {
+    font-size:4rem;
+    width: 8rem; 
+	height: 8rem;
+	--border-radius: 50%;
+	border-radius: 50%;
+    animation: rotating 1s 0.25s linear infinite;
+	text-align: center;
+}
+
+@keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+
 @media only screen and (max-width: 599px) {
 	body {
 		font-size: 3.5rem;
